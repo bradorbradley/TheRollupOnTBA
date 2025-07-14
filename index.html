@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>TBPN on TBA</title>
+    <meta content="Technology's daily show with John Coogan and Jordi Hays. Live on TBA Monday through Friday." name="description"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://tbpn-tba.vercel.app/" />
+    <meta property="og:title" content="TBPN on TBA - Technology's Daily Show" />
+    <meta property="og:description" content="Technology's daily show with John Coogan and Jordi Hays. Live on TBA Monday through Friday. Watch live streams and catch up on the latest tech discussions." />
+    <meta property="og:image" content="https://tbpn-tba.vercel.app/static/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="TBPN on TBA" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://tbpn-tba.vercel.app/" />
+    <meta property="twitter:title" content="TBPN on TBA - Technology's Daily Show" />
+    <meta property="twitter:description" content="Technology's daily show with John Coogan and Jordi Hays. Live on TBA Monday through Friday." />
+    <meta property="twitter:image" content="https://tbpn-tba.vercel.app/static/og.png" />
+    
+    <!-- Theme & Mobile -->
+    <meta name="theme-color" content="#0057ff" />
+    <meta name="color-scheme" content="light dark" />
+    
+    <!-- Resource Hints -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
+    <link rel="preconnect" href="https://d3e54v103j8qbb.cloudfront.net"/>
+    <link rel="preconnect" href="https://cdn.prod.website-files.com"/>
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="style.css" as="style"/>
+    <link rel="preload" href="static/logo.svg" as="image"/>
+    <link rel="preload" href="static/splash.png" as="image"/>
+    
+    <!-- Stylesheets -->
+    <link href="style.css" rel="stylesheet" type="text/css"/>
+    
+    <!-- Favicon -->
+    <link href="static/fav-small.png" rel="shortcut icon" type="image/x-icon"/>
+    <link href="static/fav-large.png" rel="apple-touch-icon"/>
+    
+    <!-- TBA mini-app-->
+    <meta name="fc:frame" content='{
+        "version": "next",
+        "imageUrl": "https://tbpn-tba.vercel.app/static/og.png",
+        "button": {
+          "title": "Watch Now",
+          "action": {
+            "type": "launch_frame",
+            "name": "TBPN",
+            "url": "https://tbpn-tba.vercel.app",
+            "splashImageUrl": "https://tbpn-tba.vercel.app/static/splash.png",
+            "splashBackgroundColor": "#1E51F5"
+          }
+        }
+      }' />
+
+    <!-- Font Loading -->
+    <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Custom Styles -->
+    <style type="text/css">
+        body {
+            -webkit-font-smoothing: antialiased;
+            font-family: 'Geist Mono', monospace;
+        }
+        
+        @keyframes scroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(calc(-100% - 3rem)); }
+        }
+        
+        .scroll {
+            animation: scroll 50s linear infinite;
+        }
+        
+        .video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .loading {
+            display: none;
+        }
+
+        .marquee {
+            overflow: hidden;
+            white-space: nowrap;
+            width: 100%;
+            background: #0057ff;
+        }
+
+        .marquee-content {
+            display: flex;
+            width: max-content;
+            animation: scroll 30s linear infinite;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+    </style>
+</head>
+
+<body class="body">
+    <div class="page-wrapper">
+        <!-- Marquee Banner -->
+        <div class="marquee">
+            <div class="marquee-content scroll">
+                <div class="banner-text">TBPN on TBA - تی‌بی‌پی‌ان علی تی‌بی‌ای - TBPN en TBA - TBPN 在 TBA 上 - TBPN su TBA - TBPN sur TBA - TBPN kwenye TBA - TBPN wɔ TBA so - TBPN nye TBA me - TBPN ji he ni TBA fɛɛ mɔ yɔɔ - TBPN på TBA - TBPN บน TBA - ТБПН на ТБА - ТБПН на ТБА - TBPN auf TBA - TBPN, TBA üzerinde - టిబిపిఎన్ TBAపై - टीबीपीएन TBA पर - TBPN no TBA - TBPN n'elu TBA - TBPN lori TBA - TBPN a kan TBA - TBPN auf TBA - TBPN na TBA - TBPN op TBA -</div>
+                <div class="banner-text">TBPN on TBA - تی‌بی‌پی‌ان علی تی‌بی‌ای - TBPN en TBA - TBPN 在 TBA 上 - TBPN su TBA - TBPN sur TBA - TBPN kwenye TBA - TBPN wɔ TBA so - TBPN nye TBA me - TBPN ji he ni TBA fɛɛ mɔ yɔɔ - TBPN på TBA - TBPN บน TBA - ТБПН на ТБА - ТБПН на ТБА - TBPN auf TBA - TBPN, TBA üzerinde - టిబిపిఎన్ TBAపై - टीबीपीएन TBA पर - TBPN no TBA - TBPN n'elu TBA - TBPN lori TBA - TBPN a kan TBA - TBPN auf TBA - TBPN na TBA - TBPN op TBA -</div>
+            </div>
+        </div>
+
+        <div class="main-wrapper">
+            <!-- Video Section -->
+            <div class="fixed-wrapper">
+                <div class="video-section">
+                    <div id="youtube-embed" class="video-container">
+                        <div class="code-embed w-embed w-script">
+                            <h1 id="status" class="loading"></h1>
+                            <div id="video-container" class="video-container">
+                                <div id="loading" class="loading"></div>
+                            </div>
+                            
+                            <script>
+                                const videoContainer = document.getElementById("video-container");
+                                const statusEl = document.getElementById("status");
+                                const loadingEl = document.getElementById("loading");
+                                
+                                async function checkLive() {
+                                    try {
+                                        const liveRes = await fetch('https://tbpn-scroll.vercel.app/api/getCurrentVideo');
+                                        const liveData = await liveRes.json();
+                                        embedVideo(liveData.videoId);
+                                    } catch (e) {
+                                        handleError();
+                                    }
+                                }
+                                
+                                function embedVideo(videoId) {
+                                    loadingEl.style.display = "none";
+                                    const iframe = document.createElement("iframe");
+                                    iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+                                    iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+                                    iframe.allowFullscreen = true;
+                                    videoContainer.appendChild(iframe);
+                                }
+                                
+                                function handleError() {}
+                                
+                                checkLive();
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Live Status Indicators -->
+            <div class="scroll-wrapper">
+                <div class="is-live"><div>Live</div></div>
+                <div class="is-offline"><div>Offline</div></div>
+                <div class="live-indicator">
+                    <div class="indicator-wrapper">
+                        <div data-w-id="7abba08c-bf34-dfa1-8a70-88164ac4a357" class="dot"></div>
+                        <div>Live Now</div>
+                    </div>
+                </div>
+                <div class="offline-indicator">
+                    <div class="indicator-wrapper">
+                        <div class="dot grey"></div>
+                        <div>Offline</div>
+                    </div>
+                </div>
+
+                <!-- Content Sections -->
+                <div class="section-container">
+                    <!-- Logo Section -->
+                    <div class="content-block">
+                        <div data-w-id="29f71246-bb96-57f1-f370-2e479254add7" class="image-wrap">
+                            <div class="logo-image">
+                                <div class="logo">
+                                    <img src="static/logo.svg" loading="lazy" alt="" class="lottie-animation"/>
+                                </div>
+                                <img src="https://cdn.prod.website-files.com/67c21d2a7633aaaad4da9a36/67d3adaf0a086cde05255daf_mask.svg" loading="lazy" alt="" class="mask"/>
+                                <div class="shine"></div>
+                                <img src="static/gradient.png" loading="lazy" alt="" class="gradient"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SPONSOR LINKS -->
+                    <div class="content-block sponsor-block">
+                        <div class="title-wrapper">
+                            <h2>MADE POSSIBLE BUY</h2>
+                        </div>
+
+                        <!-- 0: noice full width -->
+                        <a href="#" class="sponsor-link-block w-inline-block token-link" data-token="eip155:8453/erc20:0x9cb41fd9dc6891bae8187029461bfaadf6cc0c69">
+                            <img src="static/noice-button.png" loading="lazy" alt="noice" class="logo-brand-0"/>
+                        </a>
+
+                        <!-- Additional Sponsor Buttons - 3 rows of 2 -->
+                        <div class="col-wrap _2-col">
+                                                    <!-- 1: row 1 column 1 -->
+                        <a href="#" class="sponsor-link-block w-inline-block token-link" data-token="eip155:8453/erc20:0x22af33fe49fd1fa80c7149773dde5890d3c76f3b">
+                            <img src="static/bankr.gif" loading="lazy" alt="bankroll" class="logo-brand-1">
+                        </a>
+                        <!-- 2: row 1 column 2 -->
+                        <a href="#" class="sponsor-link-block w-inline-block token-link" data-token="eip155:8453/erc20:0x06f71fb90f84b35302d132322a3c90e4477333b0">
+                            <img src="static/bracky.svg" loading="lazy" alt="degen" class="logo-brand-2">
+                        </a>
+                        </div>
+                        <div class="col-wrap _2-col">
+                            <!-- 3: row 2 col 1 -->
+                            <a href="#" class="sponsor-link-block w-inline-block token-link" data-token="eip155:8453/erc20:0x26E0331355dF5Ef082F69dF161218093708a73ac">
+                                <img src="static/harmonybot.svg" loading="lazy" alt="harmonybot" class="logo-brand-3">
+                            </a>
+                            <!-- 4: row 2 col 2 -->
+                            <a href="#" class="sponsor-link-block w-inline-block token-link" data-token="eip155:8453/erc20:0x4ed4e862860bed51a9570b96d89af5e1b0efefed">
+                                <img src="static/degen.svg" loading="lazy" alt="degen" class="logo-brand-4">
+                            </a>
+                        </div>
+                        <div class="col-wrap _2-col">
+                            <!-- 5: row 3 col 1 -->
+                            <a href="#" class="sponsor-link-block w-inline-block token-link" data-token="eip155:8453/erc20:0x1f015712aa2a48085ec93f87d643bb625b668b07">
+                                <img src="static/indexy.svg" loading="lazy" alt="indexy" class="logo-brand-5">
+                            </a>
+                            <!-- 6: row 3 col 2 -->
+                            <a href="#" class="sponsor-link-block w-inline-block token-link" data-token="eip155:8453/erc20:0x1111111111166b7fe7bd91427724b487980afc69">
+                                <img src="static/zora.svg" loading="lazy" alt="zora" class="logo-brand-6">
+                            </a>
+                        </div>
+
+                        <div class="title-wrapper">
+                            <h2>MADE BY</h2>
+                        </div>
+
+                        <a href="#" class="sponsor-link-block w-inline-block profile-link" data-fid="373">
+                            <img src="static/jayme.png" loading="lazy" alt="jayme"/>
+                        </a>
+                    </div>
+
+                   <!-- DISCLAIMER -->
+                    <div class="content-block" style="padding-bottom: 2rem;">
+                        <div class="title-wrapper"><h2>DISCLAIMER</h2></div>
+                        <div class="disclaimer">
+                            This mini app is the unauthorized authorized pirate feed of TBPN on TBA BROUGHT TO YOU BY <a href="#" class="profile-link" data-fid="373" style="color: #7dd3fc; text-decoration: none;">@JAYME</a>. It IS NOT AFFILIATED WITH TBPN, THE MOST PROFITABLE PODCAST IN THE WORLD.
+                        </div>
+                    </div>
+  
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- SDK splash screen dismiss -->
+    <script type="module">
+      import { sdk } from 'https://esm.sh/@farcaster/miniapp-sdk';
+
+      sdk.actions.ready()
+        .then(() => {
+          sdk.actions.addMiniApp();
+          console.log('Splash screen dismissed');
+        })
+        .catch((err) => {
+          console.error('SDK ready failed:', err);
+        });
+    </script>
+
+    <!-- Final: Just fire SDK actions, no addMiniApp, no fallback -->
+    <script type="module">
+      let cachedSdk = null;
+
+      async function getSdk() {
+        if (!cachedSdk) {
+          const { sdk } = await import('https://esm.sh/@farcaster/miniapp-sdk');
+          await sdk.actions.ready(); // just dismiss splash
+          cachedSdk = sdk;
+        }
+        return cachedSdk;
+      }
+
+      function setupLinks() {
+        document.querySelectorAll('.token-link').forEach(link => {
+          link.addEventListener('click', async (e) => {
+            e.preventDefault();
+            const token = link.dataset.token;
+            if (!token) return;
+
+            try {
+              const sdk = await getSdk();
+              sdk.actions.viewToken({ token });
+            } catch (err) {
+              console.error('viewToken failed:', err);
+            }
+          });
+        });
+
+        document.querySelectorAll('.profile-link').forEach(link => {
+          link.addEventListener('click', async (e) => {
+            e.preventDefault();
+            const fid = parseInt(link.dataset.fid, 10);
+            if (!fid) return;
+
+            try {
+              const sdk = await getSdk();
+              sdk.actions.viewProfile({ fid });
+            } catch (err) {
+              console.error('viewProfile failed:', err);
+            }
+          });
+        });
+      }
+
+      setupLinks();
+    </script>
+    
+    <!-- Live Status Script -->
+    <script src="live-status.js"></script>
+</body>
+</html>
