@@ -64,6 +64,12 @@
     <!-- Font Loading -->
     <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
     
+    <!-- Vercel Analytics -->
+    <script>
+      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+    
     <!-- Custom Styles -->
     <style type="text/css">
         body {
@@ -216,7 +222,7 @@
                     <!-- SPONSOR LINKS -->
                     <div class="content-block sponsor-block">
                         <div class="title-wrapper">
-                            <h2>MADE POSSIBLE BUYs</h2>
+                            <h2>MADE POSSIBLE BUY</h2>
                         </div>
 
                         <!-- 0: noice full width -->
@@ -284,7 +290,6 @@
 
       sdk.actions.ready()
         .then(() => {
-          sdk.actions.addMiniApp();
           console.log('Splash screen dismissed');
         })
         .catch((err) => {
@@ -299,7 +304,6 @@
       async function getSdk() {
         if (!cachedSdk) {
           const { sdk } = await import('https://esm.sh/@farcaster/miniapp-sdk');
-          await sdk.actions.ready(); // just dismiss splash
           cachedSdk = sdk;
         }
         return cachedSdk;
@@ -311,6 +315,12 @@
             e.preventDefault();
             const token = link.dataset.token;
             if (!token) return;
+
+            // Track custom event for token selection
+            const img = link.querySelector('img');
+            if (img && img.alt) {
+              va('event', { name: 'selected ' + img.alt });
+            }
 
             try {
               const sdk = await getSdk();
@@ -326,6 +336,12 @@
             e.preventDefault();
             const fid = parseInt(link.dataset.fid, 10);
             if (!fid) return;
+
+            // Track custom event for profile selection
+            const img = link.querySelector('img');
+            if (img && img.alt) {
+              va('event', { name: 'selected ' + img.alt });
+            }
 
             try {
               const sdk = await getSdk();
