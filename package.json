@@ -1,16 +1,33 @@
 {
-  "name": "tbpn",
+  "name": "tbpn-on-tba",
   "version": "1.0.0",
+  "private": true,
   "scripts": {
-    "build": "echo 'No build step required'",
-    "start": "serve ."
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
     "@farcaster/frame-node": "^0.0.29",
     "@farcaster/frame-sdk": "^0.0.45",
+    "@farcaster/miniapp-sdk": "^0.1.8",
     "@neynar/nodejs-sdk": "^2.43.0",
     "@vercel/analytics": "^1.5.0",
+    "next": "^14.0.0",
     "node-fetch": "^3.3.2",
-    "serve": "^14.2.1"
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "autoprefixer": "^10.0.0",
+    "eslint": "^8.0.0",
+    "eslint-config-next": "^14.0.0",
+    "postcss": "^8.0.0",
+    "tailwindcss": "^3.3.0",
+    "typescript": "^5.0.0"
   }
 }

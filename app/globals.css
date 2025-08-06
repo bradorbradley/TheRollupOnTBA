@@ -1,0 +1,180 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&display=swap');
+
+/* Custom font face for Record Laser */
+@font-face {
+  font-family: Record Laser;
+  src: url("https://cdn.prod.website-files.com/67c21d2a7633aaaad4da9a36/67c4e4be0d51e5ec840384ca_BlackTrial.otf") format("opentype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* CSS Variables */
+:root {
+  --black: black;
+  --white: white;
+  --brand-green: #006145;
+  --grey: #262626;
+  --brand-light-green: #096;
+  --margin-8: .5rem;
+  --brand-red: #e7000b;
+  --brand-purple: #615fff;
+  --brand-yellow: #ffe020;
+  --margin-12: 12px;
+}
+
+/* Base styles */
+body {
+  -webkit-font-smoothing: antialiased;
+  font-family: 'Geist Mono', monospace;
+  background-color: var(--black);
+  color: var(--white);
+  text-transform: uppercase;
+  font-size: 14px;
+  line-height: 20px;
+  margin: 0;
+}
+
+/* Animations */
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-100% - 3rem)); }
+}
+
+.scroll {
+  animation: scroll 50s linear infinite;
+}
+
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-content {
+  animation: marquee-scroll 30s linear infinite;
+}
+
+/* Video container styles */
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.loading {
+  display: none;
+}
+
+/* TAPWATER token link styling */
+.disclaimer .token-link {
+  color: #2154F7 !important;
+  text-decoration: underline !important;
+  font-weight: bold !important;
+}
+
+.disclaimer .token-link:hover,
+.disclaimer .token-link:visited,
+.disclaimer .token-link:active {
+  color: #2154F7 !important;
+  text-decoration: underline !important;
+  font-weight: bold !important;
+}
+
+/* Typography */
+h1 {
+  text-transform: uppercase;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-family: Record Laser, Arial, sans-serif;
+  font-size: 70px;
+  font-weight: 900;
+  line-height: 70px;
+}
+
+h2 {
+  letter-spacing: .3px;
+  text-transform: uppercase;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-family: Record Laser, Arial, sans-serif;
+  font-size: 3em;
+  font-weight: 900;
+  line-height: 90%;
+}
+
+p {
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  font-size: 15px;
+  line-height: 18px;
+}
+
+/* Utility classes */
+.text-link-disclaimer {
+  font-family: 'Geist Mono', monospace;
+  font-weight: 600;
+  text-decoration: none;
+  color: inherit;
+  text-align: left;
+}
+
+/* Component specific styles that need to remain */
+.dot {
+  background-color: var(--brand-red);
+  filter: drop-shadow(0 0 9px #ff0000b3);
+  border-radius: 100px;
+  width: 12px;
+  height: 12px;
+  box-shadow: inset 0 0 5px #ffffff52;
+}
+
+.dot.grey {
+  filter: none;
+  background-color: #a1a1a1;
+}
+
+.shine {
+  z-index: 2;
+  opacity: 1;
+  filter: blur(50px);
+  background-color: #0000007a;
+  border-radius: 0%;
+  width: 80%;
+  height: 120%;
+  margin-left: auto;
+  margin-right: auto;
+  position: absolute;
+  left: auto;
+  right: auto;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 479px) {
+  h2 {
+    font-size: 2em;
+    line-height: 90%;
+  }
+  
+  .shine {
+    display: none;
+  }
+}

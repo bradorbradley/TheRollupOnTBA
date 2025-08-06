@@ -1,34 +1,7 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "."
-      }
-    },
-    {
-      "src": "api/**/*.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/cron-notify",
-      "dest": "/api/cron-notify.js"
-    },
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
-    }
-  ],
   "crons": [{
     "path": "/api/cron-notify",
     "schedule": "0 18 * * 1-5"
   }]
-} 
+}
