@@ -35,8 +35,17 @@ export default function VideoSection() {
     }
 
     function handleError() {
-      // Error handling can be expanded here
-      console.log('Error loading video')
+      if (!videoContainerRef.current) return
+      
+      videoContainerRef.current.innerHTML = `
+        <div class="flex items-center justify-center h-full text-white">
+          <div class="text-center">
+            <p class="text-lg mb-2">Unable to load video</p>
+            <p class="text-sm opacity-75">Please check back later</p>
+          </div>
+        </div>
+      `
+      console.error('Error loading video')
     }
 
     checkLive()

@@ -21,22 +21,20 @@ function SponsorLink({ href, token, fid, children, className = '' }: SponsorLink
       if (token) {
         // Track custom event for token selection
         const img = e.currentTarget.querySelector('img')
-        if (img?.alt) {
-          // @ts-ignore
-          if (typeof window !== 'undefined' && window.va) {
-            // @ts-ignore
-            window.va('event', { name: 'selected ' + img.alt })
+        if (img?.alt && typeof window !== 'undefined' && 'va' in window) {
+          const va = (window as any).va
+          if (typeof va === 'function') {
+            va('event', { name: 'selected ' + img.alt })
           }
         }
         await sdk.actions.viewToken({ token })
       } else if (fid) {
         // Track custom event for profile selection
         const img = e.currentTarget.querySelector('img')
-        if (img?.alt) {
-          // @ts-ignore
-          if (typeof window !== 'undefined' && window.va) {
-            // @ts-ignore
-            window.va('event', { name: 'selected ' + img.alt })
+        if (img?.alt && typeof window !== 'undefined' && 'va' in window) {
+          const va = (window as any).va
+          if (typeof va === 'function') {
+            va('event', { name: 'selected ' + img.alt })
           }
         }
         await sdk.actions.viewProfile({ fid })

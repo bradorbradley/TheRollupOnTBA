@@ -41,22 +41,9 @@ body {
 }
 
 /* Animations */
-@keyframes scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(calc(-100% - 3rem)); }
-}
-
-.scroll {
-  animation: scroll 50s linear infinite;
-}
-
 @keyframes marquee-scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 .marquee-content {
@@ -80,6 +67,7 @@ body {
   border: none;
 }
 
+/* Loading state - currently unused but kept for future use */
 .loading {
   display: none;
 }
