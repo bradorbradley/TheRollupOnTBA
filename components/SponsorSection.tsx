@@ -153,7 +153,7 @@ function SponsorLink({ href, token, fid, children, className = '' }: SponsorLink
     
     try {
       if (token) {
-        // Track custom event for token selection - TBPN style
+        // Track custom event for token selection
         const img = e.currentTarget.querySelector('img')
         const span = e.currentTarget.querySelector('span')
         const trackingName = img?.alt || span?.textContent
@@ -167,7 +167,7 @@ function SponsorLink({ href, token, fid, children, className = '' }: SponsorLink
         console.log('Opening token:', token)
         await sdk.actions.viewToken({ token })
       } else if (fid) {
-        // Track custom event for profile selection - TBPN style
+        // Track custom event for profile selection
         const img = e.currentTarget.querySelector('img')
         const span = e.currentTarget.querySelector('span')
         const trackingName = img?.alt || span?.textContent

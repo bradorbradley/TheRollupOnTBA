@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
         notification: {
           title: 'The Rollup is Live',
           body: 'Weekly crypto news is streaming now on Farcaster',
-          target_url: 'https://tbpn-tba.vercel.app',
+          target_url: 'https://the-rollup-base-miniapp.vercel.app',
           uuid: randomUUID(),
         },
       }),
