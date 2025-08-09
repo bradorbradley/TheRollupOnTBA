@@ -1,78 +1,54 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 
 export default function VideoSection() {
-  const videoContainerRef = useRef<HTMLDivElement>(null)
+  const [isLive, setIsLive] = useState(false)
 
   useEffect(() => {
-    async function checkLive() {
-      try {
-        console.log('Loading The Rollup stream')
-        embedTheRollupStream()
-      } catch (e) {
-        console.error('Failed to load The Rollup stream:', e)
-        handleError()
-      }
+    // Simple check - you can enhance this with actual live status API call
+    const checkLiveStatus = () => {
+      const now = new Date()
+      const day = now.getDay() // 0 = Sunday, 3 = Wednesday
+      const hour = now.getHours()
+      
+      // Wednesday between 11 AM and 2 PM ET (approximate live hours)
+      const isLiveTime = day === 3 && hour >= 11 && hour < 14
+      setIsLive(isLiveTime)
     }
 
-    function embedTheRollupStream() {
-      if (!videoContainerRef.current) return
-
-      console.log('Creating iframe for The Rollup')
-      
-      // Clear container first
-      videoContainerRef.current.innerHTML = ''
-      
-      // Create iframe with proper attributes
-      const iframe = document.createElement("iframe")
-      
-      // The Rollup's channel live stream URL
-      iframe.src = `https://www.youtube.com/embed/live_stream?channel=UCC2UPtfjtdAgofzuxUPZJ6g&autoplay=0&mute=0`
-      iframe.width = "100%"
-      iframe.height = "100%"
-      iframe.frameBorder = "0"
-      iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      iframe.allowFullscreen = true
-      iframe.style.width = "100%"
-      iframe.style.height = "100%"
-      iframe.style.border = "none"
-      iframe.style.display = "block"
-
-      console.log('Iframe created with src:', iframe.src)
-      console.log('Video container element:', videoContainerRef.current)
-
-      // Append iframe
-      videoContainerRef.current.appendChild(iframe)
-      
-      console.log('Iframe appended to container')
-    }
-
-    function handleError() {
-      if (!videoContainerRef.current) return
-      
-      videoContainerRef.current.innerHTML = `
-        <div class="flex items-center justify-center h-full text-white">
-          <div class="text-center">
-            <p class="text-lg mb-2">The Rollup Stream Loading...</p>
-            <p class="text-sm opacity-75">Check back during live hours</p>
-          </div>
-        </div>
-      `
-      console.error('Error loading video')
-    }
-
-    checkLive()
+    checkLiveStatus()
+    const interval = setInterval(checkLiveStatus, 60000) // Check every minute
+    
+    return () => clearInterval(interval)
   }, [])
+
+  if (isLive) {
+    return (
+      <div className="w-full h-[200px] lg:fixed lg:top-9 lg:left-0 lg:w-[63%] lg:h-[calc(100vh-2.25rem)] bg-black border-r border-line flex items-center justify-center pt-0 lg:pt-0 static lg:static">
+        <iframe
+          src="https://www.youtube.com/embed/live_stream?channel=UCC2UPtfjtdAgofzuxUPZJ6g&autoplay=0&mute=0"
+          className="w-full h-full"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          title="The Rollup Live Stream"
+        />
+      </div>
+    )
+  }
 
   return (
     <div className="w-full h-[200px] lg:fixed lg:top-9 lg:left-0 lg:w-[63%] lg:h-[calc(100vh-2.25rem)] bg-black border-r border-line flex items-center justify-center pt-0 lg:pt-0 static lg:static">
-      <div 
-        ref={videoContainerRef}
-        className="w-full h-full bg-gray-900"
-        style={{ minHeight: '200px', minWidth: '100%' }}
-      >
-        <div className="loading hidden"></div>
+      <div className="flex items-center justify-center h-full text-center">
+        <div>
+          <p className="text-white text-xl font-bold mb-2" style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, sans-serif' }}>
+            NOT LIVE
+          </p>
+          <p className="text-white/70 text-sm" style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, sans-serif' }}>
+            The Rollup streams Wednesdays
+          </p>
+        </div>
       </div>
     </div>
   )
