@@ -10,12 +10,12 @@ export const metadata: Metadata = {
   // Open Graph / Facebook
   openGraph: {
     type: 'website',
-    url: 'https://YOUR_VERCEL_URL/',
+    url: 'https://the-rollup-base-miniapp.vercel.app/',
     title: 'The Rollup Live - Weekly Crypto News',
     description: 'Weekly crypto news, Base ecosystem updates, and blockchain insights. Live every Wednesday with comprehensive DeFi analysis and blockchain discussions.',
     images: [
       {
-        url: 'https://YOUR_VERCEL_URL/token%20logos/og.png',
+        url: 'https://the-rollup-base-miniapp.vercel.app/token%20logos/og.png',
         width: 1200,
         height: 630,
         alt: 'The Rollup Live',
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'The Rollup Live - Weekly Crypto News',
     description: 'Weekly crypto news, Base ecosystem updates, and blockchain insights. Live every Wednesday.',
-    images: ['https://YOUR_VERCEL_URL/token%20logos/og.png'],
+    images: ['https://the-rollup-base-miniapp.vercel.app/token%20logos/og.png'],
   },
   
   // Theme & Mobile
@@ -54,14 +54,14 @@ export const metadata: Metadata = {
     // TBA mini-app frame metadata
     'fc:frame': JSON.stringify({
       version: "next",
-      imageUrl: "https://YOUR_VERCEL_URL/token%20logos/og.png",
+      imageUrl: "https://the-rollup-base-miniapp.vercel.app/token%20logos/og.png",
       button: {
         title: "Watch The Rollup Live",
         action: {
           type: "launch_frame",
           name: "The Rollup Live",
-          url: "https://YOUR_VERCEL_URL",
-          splashImageUrl: "https://YOUR_VERCEL_URL/token%20logos/splash.png",
+          url: "https://the-rollup-base-miniapp.vercel.app",
+          splashImageUrl: "https://the-rollup-base-miniapp.vercel.app/token%20logos/splash.png",
           splashBackgroundColor: "#4285F4"
         }
       }
