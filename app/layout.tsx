@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     description: 'Weekly crypto news, Base ecosystem updates, and blockchain insights. Live every Wednesday with comprehensive DeFi analysis and blockchain discussions.',
     images: [
       {
-        url: 'https://the-rollup-base-miniapp.vercel.app/token%20logos/og.png',
+        url: 'https://the-rollup-base-miniapp.vercel.app/brand/Banner%20rollup.jpg',
         width: 1200,
         height: 630,
         alt: 'The Rollup Live',
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'The Rollup Live - Weekly Crypto News',
     description: 'Weekly crypto news, Base ecosystem updates, and blockchain insights. Live every Wednesday.',
-    images: ['https://the-rollup-base-miniapp.vercel.app/token%20logos/og.png'],
+    images: ['https://the-rollup-base-miniapp.vercel.app/brand/Banner%20rollup.jpg'],
   },
   
   // Theme & Mobile
@@ -38,9 +38,9 @@ export const metadata: Metadata = {
   
   // Icons
   icons: {
-    icon: '/token%20logos/fav-small.png',
+    icon: '/brand/rollup%20Logo%202.svg',
     apple: '/token%20logos/fav-large.png',
-    shortcut: '/token%20logos/fav-small.png',
+    shortcut: '/brand/rollup%20Logo%202.svg',
   },
   
   // Viewport
@@ -54,14 +54,14 @@ export const metadata: Metadata = {
     // TBA mini-app frame metadata
     'fc:frame': JSON.stringify({
       version: "next",
-      imageUrl: "https://the-rollup-base-miniapp.vercel.app/token%20logos/og.png",
+      imageUrl: "https://the-rollup-base-miniapp.vercel.app/brand/Banner%20rollup.jpg",
       button: {
         title: "Watch The Rollup Live",
         action: {
           type: "launch_frame",
           name: "The Rollup Live",
           url: "https://the-rollup-base-miniapp.vercel.app",
-          splashImageUrl: "https://the-rollup-base-miniapp.vercel.app/token%20logos/splash.png",
+          splashImageUrl: "https://the-rollup-base-miniapp.vercel.app/brand/Banner%20rollup.jpg",
           splashBackgroundColor: "#4285F4"
         }
       }
@@ -84,8 +84,8 @@ export default function RootLayout({
         <link rel="preconnect" href="https://cdn.prod.website-files.com" />
         
         {/* Preload Critical Resources */}
-        <link rel="preload" href="/token%20logos/logo.svg" as="image" />
-        <link rel="preload" href="/token%20logos/splash.png" as="image" />
+        <link rel="preload" href="/brand/rollup%20Logo%202.svg" as="image" />
+        <link rel="preload" href="/brand/Banner%20rollup.jpg" as="image" />
       </head>
       <body className="font-geist-mono antialiased">
         {children}

@@ -9,15 +9,15 @@
     "name": "The Rollup Live",
     "subtitle": "Watch The Rollup live with Robbie & Andy",
     "description": "Weekly crypto news, Base ecosystem updates, and blockchain insights. Live every Wednesday with comprehensive DeFi analysis and blockchain discussions.",
-    "iconUrl": "https://the-rollup-base-miniapp.vercel.app/token%20logos/icon.png",
+    "iconUrl": "https://the-rollup-base-miniapp.vercel.app/brand/rollup%20Logo%202.svg",
     "homeUrl": "https://the-rollup-base-miniapp.vercel.app",
-    "splashImageUrl": "https://the-rollup-base-miniapp.vercel.app/token%20logos/splash.png",
+    "splashImageUrl": "https://the-rollup-base-miniapp.vercel.app/brand/Banner%20rollup.jpg",
     "splashBackgroundColor": "#4285F4",
-    "heroImageUrl": "https://the-rollup-base-miniapp.vercel.app/token%20logos/og.png",
+    "heroImageUrl": "https://the-rollup-base-miniapp.vercel.app/brand/Banner%20rollup.jpg",
     "tagline": "Face-to-face with digital assets",
     "screenshotUrls": [
-      "https://the-rollup-base-miniapp.vercel.app/token%20logos/og.png",
-      "https://the-rollup-base-miniapp.vercel.app/token%20logos/splash.png"
+      "https://the-rollup-base-miniapp.vercel.app/brand/Banner%20rollup.jpg",
+      "https://the-rollup-base-miniapp.vercel.app/brand/Wordmark%20color%20logo%20%2B%20black%20words.PNG"
     ],
     "primaryCategory": "news-media",
     "tags": ["crypto", "defi", "rollup", "blockchain", "base"],
