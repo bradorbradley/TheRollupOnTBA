@@ -3,7 +3,6 @@ import VideoSection from '@/components/VideoSection'
 import LiveStatus from '@/components/LiveStatus'
 import LogoSection from '@/components/LogoSection'
 import SponsorSection from '@/components/SponsorSection'
-import Disclaimer from '@/components/Disclaimer'
 
 export default function Home() {
   return (
@@ -32,8 +31,6 @@ export default function Home() {
               <SponsorSection />
             </div>
 
-            {/* Disclaimer */}
-            <Disclaimer />
           </div>
         </div>
       </div>

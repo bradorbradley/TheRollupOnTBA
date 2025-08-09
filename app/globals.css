@@ -4,6 +4,7 @@
 
 /* Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 /* Custom font face for Record Laser */
 @font-face {
@@ -14,30 +15,37 @@
   font-display: swap;
 }
 
-/* CSS Variables */
+/* The Rollup Design System CSS Variables */
 :root {
-  --black: black;
-  --white: white;
-  --brand-green: #006145;
-  --grey: #262626;
-  --brand-light-green: #096;
-  --margin-8: .5rem;
-  --brand-red: #e7000b;
-  --brand-purple: #615fff;
-  --brand-yellow: #ffe020;
-  --margin-12: 12px;
+  /* Brand */
+  --brand-blue: #3264FF;
+  --brand-orange: #F59E0B;
+  --brand-red: #EF4444;
+  
+  /* The Rollup Tan-White Theme (Default) */
+  --bg: #F4F3EF;          /* Tan-white background like therollup.co */
+  --bg-elev: #FFFFFF;     /* Pure white elevated surfaces */
+  --ink: #1A1A1A;         /* Dark text */
+  --ink-muted: #6B7280;   /* Muted text */
+  --line: #E5E7EB;        /* Light borders */
+  --chip-stroke: #D1D5DB; /* Chip borders */
+  --input-bg: #FFFFFF;    /* Input backgrounds */
+  --input-stroke: #D1D5DB; /* Input borders */
+  --cta-text: #FFFFFF;    /* Button text */
+  --button-shadow: #000000; /* 3D button shadow */
 }
 
 /* Base styles */
 body {
   -webkit-font-smoothing: antialiased;
-  font-family: 'Geist Mono', monospace;
-  background-color: var(--black);
-  color: var(--white);
-  text-transform: uppercase;
-  font-size: 14px;
-  line-height: 20px;
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji';
+  background-color: var(--bg);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.5;
   margin: 0;
+  font-weight: 400;
+  min-height: 100vh;
 }
 
 /* Animations */
@@ -48,6 +56,24 @@ body {
 
 .marquee-content {
   animation: marquee-scroll 30s linear infinite;
+}
+
+/* 3D Button Styles */
+.btn-3d {
+  position: relative;
+  transform: translateY(0);
+  transition: all 120ms ease-out;
+  box-shadow: 0 4px 0 var(--button-shadow);
+}
+
+.btn-3d:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 0 var(--button-shadow);
+}
+
+.btn-3d:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 var(--button-shadow);
 }
 
 /* Video container styles */
@@ -87,33 +113,43 @@ body {
   font-weight: bold !important;
 }
 
-/* Typography */
+/* The Rollup Typography */
 h1 {
-  text-transform: uppercase;
-  margin-top: 20px;
-  margin-bottom: 10px;
-  font-family: Record Laser, Arial, sans-serif;
-  font-size: 70px;
-  font-weight: 900;
-  line-height: 70px;
+  font-size: 2.25rem; /* 36px */
+  line-height: 2.75rem; /* 44px */
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin: 0;
 }
 
 h2 {
-  letter-spacing: .3px;
-  text-transform: uppercase;
-  margin-top: 0;
-  margin-bottom: 0;
-  font-family: Record Laser, Arial, sans-serif;
-  font-size: 3em;
-  font-weight: 900;
-  line-height: 90%;
+  font-size: 1.75rem; /* 28px */
+  line-height: 2.25rem; /* 36px */
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin: 0;
+}
+
+h3 {
+  font-size: 1.25rem; /* 20px */
+  line-height: 1.75rem; /* 28px */
+  font-weight: 700;
+  margin: 0;
 }
 
 p {
+  font-size: 1rem; /* 16px */
+  line-height: 1.5rem; /* 24px */
+  font-weight: 400;
+  margin: 0;
+}
+
+.meta {
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.25rem; /* 20px */
+  font-weight: 500;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
-  margin-bottom: 10px;
-  font-size: 15px;
-  line-height: 18px;
 }
 
 /* Utility classes */

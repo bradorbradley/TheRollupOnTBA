@@ -8,30 +8,44 @@ export default function VideoSection() {
   useEffect(() => {
     async function checkLive() {
       try {
-        const liveRes = await fetch('https://tbpn-scroll.vercel.app/api/getCurrentVideo')
-        const liveData = await liveRes.json()
-        embedVideo(liveData.videoId)
+        console.log('Loading The Rollup stream')
+        embedTheRollupStream()
       } catch (e) {
-        console.error('Failed to load video:', e)
+        console.error('Failed to load The Rollup stream:', e)
         handleError()
       }
     }
 
-    function embedVideo(videoId: string) {
+    function embedTheRollupStream() {
       if (!videoContainerRef.current) return
 
+      console.log('Creating iframe for The Rollup')
+      
+      // Clear container first
+      videoContainerRef.current.innerHTML = ''
+      
+      // Create iframe with proper attributes
       const iframe = document.createElement("iframe")
-      iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&playsinline=1`
-      iframe.setAttribute("playsinline", "true")
-      iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture")
-      iframe.setAttribute("allowfullscreen", "true")
+      
+      // The Rollup's channel live stream URL
+      iframe.src = `https://www.youtube.com/embed/live_stream?channel=UCC2UPtfjtdAgofzuxUPZJ6g&autoplay=0&mute=0`
+      iframe.width = "100%"
+      iframe.height = "100%"
+      iframe.frameBorder = "0"
+      iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      iframe.allowFullscreen = true
       iframe.style.width = "100%"
       iframe.style.height = "100%"
       iframe.style.border = "none"
+      iframe.style.display = "block"
 
-      // Clear container and add iframe
-      videoContainerRef.current.innerHTML = ''
+      console.log('Iframe created with src:', iframe.src)
+      console.log('Video container element:', videoContainerRef.current)
+
+      // Append iframe
       videoContainerRef.current.appendChild(iframe)
+      
+      console.log('Iframe appended to container')
     }
 
     function handleError() {
@@ -40,8 +54,8 @@ export default function VideoSection() {
       videoContainerRef.current.innerHTML = `
         <div class="flex items-center justify-center h-full text-white">
           <div class="text-center">
-            <p class="text-lg mb-2">Unable to load video</p>
-            <p class="text-sm opacity-75">Please check back later</p>
+            <p class="text-lg mb-2">The Rollup Stream Loading...</p>
+            <p class="text-sm opacity-75">Check back during live hours</p>
           </div>
         </div>
       `
@@ -52,10 +66,11 @@ export default function VideoSection() {
   }, [])
 
   return (
-    <div className="w-full h-[200px] lg:fixed lg:top-9 lg:left-0 lg:w-[63%] lg:h-[calc(100vh-2.25rem)] bg-black border-r border-[#656565] flex items-center justify-center pt-0 lg:pt-0 static lg:static">
+    <div className="w-full h-[200px] lg:fixed lg:top-9 lg:left-0 lg:w-[63%] lg:h-[calc(100vh-2.25rem)] bg-black border-r border-line flex items-center justify-center pt-0 lg:pt-0 static lg:static">
       <div 
         ref={videoContainerRef}
-        className="video-container"
+        className="w-full h-full bg-gray-900"
+        style={{ minHeight: '200px', minWidth: '100%' }}
       >
         <div className="loading hidden"></div>
       </div>

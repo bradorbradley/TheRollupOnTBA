@@ -3,37 +3,37 @@ import { Analytics } from '@vercel/analytics/react'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'TBPN on TBA',
-  description: "Technology's daily show with John Coogan and Jordi Hays. Live on TBA Monday through Friday.",
-  keywords: 'TBPN, TBA, technology, daily show, John Coogan, Jordi Hays, live streaming',
+  title: 'The Rollup Live',
+  description: "Weekly crypto news, Base ecosystem updates, and blockchain insights",
+  keywords: 'The Rollup, crypto news, Base ecosystem, blockchain, DeFi, Ethereum, live streaming',
   
   // Open Graph / Facebook
   openGraph: {
     type: 'website',
     url: 'https://tbpn-tba.vercel.app/',
-    title: 'TBPN on TBA - Technology\'s Daily Show',
-    description: 'Technology\'s daily show with John Coogan and Jordi Hays. Live on TBA Monday through Friday. Watch live streams and catch up on the latest tech discussions.',
+    title: 'The Rollup Live - Weekly Crypto News',
+    description: 'Weekly crypto news, Base ecosystem updates, and blockchain insights. Live every Wednesday with comprehensive DeFi analysis and blockchain discussions.',
     images: [
       {
         url: 'https://tbpn-tba.vercel.app/og.png',
         width: 1200,
         height: 630,
-        alt: 'TBPN on TBA',
+        alt: 'The Rollup Live',
       },
     ],
-    siteName: 'TBPN on TBA',
+    siteName: 'The Rollup Live',
   },
   
   // Twitter
   twitter: {
     card: 'summary_large_image',
-    title: 'TBPN on TBA - Technology\'s Daily Show',
-    description: 'Technology\'s daily show with John Coogan and Jordi Hays. Live on TBA Monday through Friday.',
+    title: 'The Rollup Live - Weekly Crypto News',
+    description: 'Weekly crypto news, Base ecosystem updates, and blockchain insights. Live every Wednesday.',
     images: ['https://tbpn-tba.vercel.app/og.png'],
   },
   
   // Theme & Mobile
-  themeColor: '#0057ff',
+  themeColor: '#4285F4',
   colorScheme: 'dark',
   
   // Icons
@@ -56,13 +56,13 @@ export const metadata: Metadata = {
       version: "next",
       imageUrl: "https://tbpn-tba.vercel.app/og.png",
       button: {
-        title: "Watch Now",
+        title: "Watch Live",
         action: {
           type: "launch_frame",
-          name: "TBPN",
+          name: "The Rollup Live",
           url: "https://tbpn-tba.vercel.app",
           splashImageUrl: "https://tbpn-tba.vercel.app/splash.png",
-          splashBackgroundColor: "#1E51F5"
+          splashBackgroundColor: "#4285F4"
         }
       }
     }),

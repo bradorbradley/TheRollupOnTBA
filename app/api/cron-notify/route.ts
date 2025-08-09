@@ -22,8 +22,8 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify({
         target_fids: [],
         notification: {
-          title: 'TBPN is Live',
-          body: 'John and Jordi are streaming now on Farcaster',
+          title: 'The Rollup is Live',
+          body: 'Weekly crypto news is streaming now on Farcaster',
           target_url: 'https://tbpn-tba.vercel.app',
           uuid: randomUUID(),
         },
