@@ -7,7 +7,7 @@ import { sdk } from '@farcaster/miniapp-sdk'
 interface SponsorLinkProps {
   href: string
   token?: string
-  fid?: string
+  fid?: number
   children: React.ReactNode
   className?: string
 }
