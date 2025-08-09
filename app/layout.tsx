@@ -10,12 +10,12 @@ export const metadata: Metadata = {
   // Open Graph / Facebook
   openGraph: {
     type: 'website',
-    url: 'https://tbpn-tba.vercel.app/',
+    url: 'https://YOUR_VERCEL_URL/',
     title: 'The Rollup Live - Weekly Crypto News',
     description: 'Weekly crypto news, Base ecosystem updates, and blockchain insights. Live every Wednesday with comprehensive DeFi analysis and blockchain discussions.',
     images: [
       {
-        url: 'https://tbpn-tba.vercel.app/og.png',
+        url: 'https://YOUR_VERCEL_URL/token%20logos/og.png',
         width: 1200,
         height: 630,
         alt: 'The Rollup Live',
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'The Rollup Live - Weekly Crypto News',
     description: 'Weekly crypto news, Base ecosystem updates, and blockchain insights. Live every Wednesday.',
-    images: ['https://tbpn-tba.vercel.app/og.png'],
+    images: ['https://YOUR_VERCEL_URL/token%20logos/og.png'],
   },
   
   // Theme & Mobile
@@ -38,9 +38,9 @@ export const metadata: Metadata = {
   
   // Icons
   icons: {
-    icon: '/fav-small.png',
-    apple: '/fav-large.png',
-    shortcut: '/fav-small.png',
+    icon: '/token%20logos/fav-small.png',
+    apple: '/token%20logos/fav-large.png',
+    shortcut: '/token%20logos/fav-small.png',
   },
   
   // Viewport
@@ -54,14 +54,14 @@ export const metadata: Metadata = {
     // TBA mini-app frame metadata
     'fc:frame': JSON.stringify({
       version: "next",
-      imageUrl: "https://tbpn-tba.vercel.app/og.png",
+      imageUrl: "https://YOUR_VERCEL_URL/token%20logos/og.png",
       button: {
-        title: "Watch Live",
+        title: "Watch The Rollup Live",
         action: {
           type: "launch_frame",
           name: "The Rollup Live",
-          url: "https://tbpn-tba.vercel.app",
-          splashImageUrl: "https://tbpn-tba.vercel.app/splash.png",
+          url: "https://YOUR_VERCEL_URL",
+          splashImageUrl: "https://YOUR_VERCEL_URL/token%20logos/splash.png",
           splashBackgroundColor: "#4285F4"
         }
       }
@@ -84,8 +84,8 @@ export default function RootLayout({
         <link rel="preconnect" href="https://cdn.prod.website-files.com" />
         
         {/* Preload Critical Resources */}
-        <link rel="preload" href="/logo.svg" as="image" />
-        <link rel="preload" href="/splash.png" as="image" />
+        <link rel="preload" href="/token%20logos/logo.svg" as="image" />
+        <link rel="preload" href="/token%20logos/splash.png" as="image" />
       </head>
       <body className="font-geist-mono antialiased">
         {children}

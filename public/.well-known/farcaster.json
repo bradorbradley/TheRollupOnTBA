@@ -1,26 +1,26 @@
 {
   "accountAssociation": {
-    "header": "eyJmaWQiOjM3MywidHlwZSI6ImF1dGgiLCJrZXkiOiIweGRlQkZmZjhENDVlOGU3M2FjNERCRTJCMGVEOEFkNDZhRDEzZmQzOTAifQ",
-    "payload": "eyJkb21haW4iOiJ0YnBuLXRiYS52ZXJjZWwuYXBwIn0",
-    "signature": "7xaTxIzKf3Nd134Ns27B05okQXIQOC0IkSysnnIef4I0Jqn/gwwOgFWE0/7Kt87+vldkYZn3Zuzl298CqOZiwRw="
+    "header": "REPLACE_WITH_SIGNED_HEADER",
+    "payload": "REPLACE_WITH_SIGNED_PAYLOAD", 
+    "signature": "REPLACE_WITH_SIGNATURE"
   },
   "frame": {
     "version": "1",
-    "name": "TBPN",
-    "subtitle": "Watch TBPN live on TBA",
-    "description": "Technology's daily show with John Coogan and Jordi Hays. Live on TBA Monday through Friday.",
-    "iconUrl": "https://tbpn-tba.vercel.app/static/icon.png",
-    "homeUrl": "https://tbpn-tba.vercel.app",
-    "splashImageUrl": "https://tbpn-tba.vercel.app/static/splash.png",
-    "splashBackgroundColor": "#1E51F5",
-    "heroImageUrl": "https://tbpn-tba.vercel.app/static/og.png",
-    "tagline": "Watch TBPN live on TBA",
+    "name": "The Rollup Live",
+    "subtitle": "Watch The Rollup live with Robbie & Andy",
+    "description": "Weekly crypto news, Base ecosystem updates, and blockchain insights. Live every Wednesday with comprehensive DeFi analysis and blockchain discussions.",
+    "iconUrl": "https://YOUR_VERCEL_URL/token%20logos/icon.png",
+    "homeUrl": "https://YOUR_VERCEL_URL",
+    "splashImageUrl": "https://YOUR_VERCEL_URL/token%20logos/splash.png",
+    "splashBackgroundColor": "#4285F4",
+    "heroImageUrl": "https://YOUR_VERCEL_URL/token%20logos/og.png",
+    "tagline": "Face-to-face with digital assets",
     "screenshotUrls": [
-      "https://tbpn-tba.vercel.app/static/og.png",
-      "https://tbpn-tba.vercel.app/static/splash.png"
+      "https://YOUR_VERCEL_URL/token%20logos/og.png",
+      "https://YOUR_VERCEL_URL/token%20logos/splash.png"
     ],
     "primaryCategory": "news-media",
-    "tags": ["tbpn", "tech", "bros"],
-    "webhookUrl": "https://api.neynar.com/f/app/b199dac3-553b-46d3-af05-4a25e24cd0f1/event"
+    "tags": ["crypto", "defi", "rollup", "blockchain", "base"],
+    "webhookUrl": "https://api.neynar.com/f/app/YOUR_NEYNAR_WEBHOOK_ID/event"
   }
 } 
