@@ -198,20 +198,6 @@ function SponsorLink({ href, token, fid, children, className = '' }: SponsorLink
 }
 
 export default function SponsorSection() {
-  useEffect(() => {
-    // Initialize SDK when component mounts
-    const initSDK = async () => {
-      try {
-        await sdk.actions.ready()
-        console.log('Splash screen dismissed')
-      } catch (err) {
-        console.error('SDK ready failed:', err)
-      }
-    }
-
-    initSDK()
-  }, [])
-
   return (
     <div className="flex flex-col gap-4">
       {/* 1. TRADE TOKENS SECTION */}

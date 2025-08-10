@@ -1,3 +1,7 @@
+'use client'
+
+import { useEffect } from 'react'
+import { sdk } from '@farcaster/miniapp-sdk'
 import MarqueeBanner from '@/components/MarqueeBanner'
 import VideoSection from '@/components/VideoSection'
 import LiveStatus from '@/components/LiveStatus'
@@ -5,6 +9,20 @@ import LogoSection from '@/components/LogoSection'
 import SponsorSection from '@/components/SponsorSection'
 
 export default function Home() {
+  useEffect(() => {
+    // Initialize SDK immediately when page loads
+    const initSDK = async () => {
+      try {
+        console.log('Initializing Farcaster SDK...')
+        await sdk.actions.ready()
+        console.log('✅ SDK ready - splash screen dismissed')
+      } catch (err) {
+        console.error('❌ SDK initialization failed:', err)
+      }
+    }
+
+    initSDK()
+  }, [])
   return (
     <div className="flex flex-col overflow-visible">
       {/* Marquee Banner */}
