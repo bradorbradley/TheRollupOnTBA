@@ -1,27 +1,41 @@
 'use client'
 
 import { useEffect } from 'react'
-import { sdk } from '@farcaster/miniapp-sdk'
 import MarqueeBanner from '@/components/MarqueeBanner'
 import VideoSection from '@/components/VideoSection'
 import LiveStatus from '@/components/LiveStatus'
 import LogoSection from '@/components/LogoSection'
 import SponsorSection from '@/components/SponsorSection'
 
+// Initialize SDK immediately when module loads
+if (typeof window !== 'undefined') {
+  import('@farcaster/miniapp-sdk').then(({ sdk }) => {
+    sdk.actions.ready().then(() => {
+      console.log('✅ Farcaster SDK ready - splash screen dismissed')
+    }).catch((err) => {
+      console.error('❌ SDK initialization failed:', err)
+    })
+  }).catch((err) => {
+    console.error('❌ Failed to load Farcaster SDK:', err)
+  })
+}
+
 export default function Home() {
   useEffect(() => {
-    // Initialize SDK immediately when page loads
+    // Fallback SDK initialization in useEffect as well
     const initSDK = async () => {
       try {
-        console.log('Initializing Farcaster SDK...')
+        const { sdk } = await import('@farcaster/miniapp-sdk')
         await sdk.actions.ready()
-        console.log('✅ SDK ready - splash screen dismissed')
+        console.log('✅ Fallback SDK ready')
       } catch (err) {
-        console.error('❌ SDK initialization failed:', err)
+        console.error('❌ Fallback SDK failed:', err)
       }
     }
 
-    initSDK()
+    // Small delay to ensure DOM is ready
+    const timer = setTimeout(initSDK, 100)
+    return () => clearTimeout(timer)
   }, [])
   return (
     <div className="flex flex-col overflow-visible">
