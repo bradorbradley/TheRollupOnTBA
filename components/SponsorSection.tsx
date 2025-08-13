@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { sdk } from '@farcaster/miniapp-sdk'
+import { subscribeToNewsletter, type SubscribeResponse } from '@/lib/newsletter'
 
 interface SponsorLinkProps {
   href: string
@@ -16,20 +17,31 @@ function NewsletterSignup() {
   const [email, setEmail] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [message, setMessage] = useState('')
+  const [error, setError] = useState('')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!email) return
 
     setIsSubmitting(true)
-    setMessage('Thanks! We\'ll connect this to The Rollup\'s backend soon.')
-    
-    // Simulate processing time
-    setTimeout(() => {
+    setMessage('')
+    setError('')
+
+    try {
+      const data: SubscribeResponse = await subscribeToNewsletter(email)
+      if ((data as any).error === 'Member Exists') {
+        // silently do nothing per requirements
+        setIsSubmitting(false)
+        return
+      }
+      setMessage('Subscribed!')
       setIsSubmitting(false)
       setEmail('')
       setTimeout(() => setMessage(''), 3000)
-    }, 1000)
+    } catch (e) {
+      setError('Failed to subscribe')
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -53,6 +65,9 @@ function NewsletterSignup() {
       </div>
       {message && (
         <p className="text-sm text-ink-muted mt-2">{message}</p>
+      )}
+      {error && (
+        <p className="text-sm text-red-600 mt-2">{error}</p>
       )}
     </form>
   )
@@ -123,22 +138,9 @@ function HostProfile({ name, imageSrc, fid }: HostProfileProps) {
           alt={name}
           width={64}
           height={64}
-          className="w-16 h-16 rounded-lg object-cover"
-        />
-        {/* Follow Button */}
-        <button
+          className="w-16 h-16 rounded-lg object-cover cursor-pointer hover:opacity-80 transition-all duration-300"
           onClick={handleFollow}
-          className="absolute -top-1 -right-1 w-6 h-6 bg-brand-blue text-white rounded-full flex items-center justify-center text-xs font-bold hover:opacity-80 transition-all duration-300"
-          disabled={!fid || isFollowed}
-        >
-          {isAnimating ? (
-            <span className="animate-spin">⟳</span>
-          ) : isFollowed ? (
-            <span className="text-green-400">✓</span>
-          ) : (
-            '+'
-          )}
-        </button>
+        />
       </div>
       <span className="text-black text-sm font-medium mt-1 block" style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, sans-serif' }}>
         {name}
