@@ -5,47 +5,21 @@ import { useState, useEffect } from 'react'
 export default function VideoSection() {
   const [videoId, setVideoId] = useState<string | null>(null)
   const [isLive, setIsLive] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
 
   const channelId = 'UCC2UPtfjtdAgofzuxUPZJ6g'
-  const fallbackVideoId = 'dQw4w9WgXcQ'
+  const uploadsPlaylistId = `UU${channelId.slice(2)}`
 
   useEffect(() => {
-    async function fetchLatestVideo() {
-      setIsLoading(true)
-      
+    async function resolveEmbeddable() {
       try {
-        const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`
-        const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(rssUrl)}`
-        
-        const response = await fetch(proxyUrl)
-        const data = await response.json()
-        
-        if (data.contents) {
-          const parser = new DOMParser()
-          const xmlDoc = parser.parseFromString(data.contents, 'text/xml')
-          const entries = xmlDoc.querySelectorAll('entry')
-          
-          if (entries.length > 0) {
-            const latestEntry = entries[0]
-            const videoUrl = latestEntry.querySelector('link')?.getAttribute('href')
-            const extractedVideoId = videoUrl?.split('v=')[1]
-            
-            if (extractedVideoId) {
-              setVideoId(extractedVideoId)
-              setIsLoading(false)
-              return
-            }
-          }
-        }
-        
-        throw new Error('RSS feed failed')
-        
-      } catch (err) {
-        setVideoId(fallbackVideoId)
+        const response = await fetch(`/api/youtube/resolve?channelId=${channelId}`, { cache: 'no-store' })
+        if (!response.ok) return
+        const data: { isLive?: boolean; videoId?: string | null } = await response.json()
+        if (typeof data.isLive === 'boolean') setIsLive(data.isLive)
+        if (data.videoId) setVideoId(data.videoId)
+      } catch {
+        // swallow; fallback is playlist
       }
-      
-      setIsLoading(false)
     }
 
     const checkLiveStatus = () => {
@@ -57,67 +31,37 @@ export default function VideoSection() {
       setIsLive(isLiveTime)
     }
 
+    // Prefer server resolution; fall back to time-based hint only
+    resolveEmbeddable()
     checkLiveStatus()
-    fetchLatestVideo()
     
     const interval = setInterval(() => {
       checkLiveStatus()
       if (Math.random() < 0.1) {
-        fetchLatestVideo()
+        resolveEmbeddable()
       }
     }, 60000)
     
     return () => clearInterval(interval)
   }, [])
 
-  if (isLoading) {
-    return (
-      <div className="w-full h-[200px] lg:fixed lg:top-9 lg:left-0 lg:w-[63%] lg:h-[calc(100vh-2.25rem)] bg-black border-r border-line flex items-center justify-center pt-0 lg:pt-0 static lg:static">
-        <div className="flex items-center justify-center h-full text-center">
-          <div>
-            <p className="text-white text-xl font-bold mb-2" style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, sans-serif' }}>
-              LOADING...
-            </p>
-            <p className="text-white/70 text-sm" style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, sans-serif' }}>
-              Fetching latest video
-            </p>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
-  if (videoId) {
-    const embedUrl = isLive 
-      ? `https://www.youtube.com/embed/live_stream?channel=${channelId}&autoplay=0&mute=0`
-      : `https://www.youtube.com/embed/${videoId}?autoplay=0&mute=0`
-    
-    return (
-      <div className="w-full h-[200px] lg:fixed lg:top-9 lg:left-0 lg:w-[63%] lg:h-[calc(100vh-2.25rem)] bg-black border-r border-line flex items-center justify-center pt-0 lg:pt-0 static lg:static">
-        <iframe
-          src={embedUrl}
-          className="w-full h-full"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-          title={isLive ? "The Rollup Live Stream" : "Latest The Rollup Video"}
-        />
-      </div>
-    )
-  }
+  const embedUrl = isLive
+    ? `https://www.youtube-nocookie.com/embed/live_stream?channel=${channelId}&autoplay=0&mute=0`
+    : videoId
+      ? `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=0&mute=0`
+      : `https://www.youtube-nocookie.com/embed/videoseries?list=${uploadsPlaylistId}&autoplay=0&mute=0`
 
   return (
-    <div className="w-full h-[200px] lg:fixed lg:top-9 lg:left-0 lg:w-[63%] lg:h-[calc(100vh-2.25rem)] bg-black border-r border-line flex items-center justify-center pt-0 lg:pt-0 static lg:static">
-      <div className="flex items-center justify-center h-full text-center">
-        <div>
-          <p className="text-white text-xl font-bold mb-2" style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, sans-serif' }}>
-            {isLive ? 'LIVE NOW' : 'NOT LIVE'}
-          </p>
-          <p className="text-white/70 text-sm" style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, sans-serif' }}>
-            The Rollup streams Wednesdays
-          </p>
-        </div>
-      </div>
+    <div className="w-full h-[260px] lg:fixed lg:top-9 lg:left-0 lg:w-[63%] lg:h-[calc(100vh-2.25rem)] bg-black border-r border-line flex items-center justify-center pt-0 lg:pt-0 static lg:static mt-2 lg:mt-0">
+      <iframe
+        src={embedUrl}
+        className="w-full h-full"
+        frameBorder="0"
+        referrerPolicy="origin-when-cross-origin"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+        title={isLive ? "The Rollup Live Stream" : "Latest The Rollup Video"}
+      />
     </div>
   )
 }
