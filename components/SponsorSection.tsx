@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { sdk } from '@farcaster/miniapp-sdk'
 import { subscribeToNewsletter, type SubscribeResponse } from '@/lib/newsletter'
+import { BasePayGridButton } from './BasePay'
 
 interface SponsorLinkProps {
   href: string
@@ -306,6 +307,11 @@ export default function SponsorSection() {
             className="w-full h-auto rounded-base btn-3d hover:opacity-80 transition-opacity bg-brand-blue"
           />
         </SponsorLink>
+      </div>
+
+      {/* Full-width Base Pay */}
+      <div className="mt-4">
+        <BasePayGridButton />
       </div>
 
       {/* 2. SHOW LOGO/BANNER */}
