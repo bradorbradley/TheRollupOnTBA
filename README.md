@@ -1,4 +1,4 @@
-# TBPN on TBA
+# The Rollup on TBA
 
 A Next.js application for the Technology's daily show with John Coogan and Jordi Hays, featuring live streaming on TBA Monday through Friday. This application can be easily customized for your own live streaming show with YouTube integration and sponsor widgets.
 
@@ -36,8 +36,8 @@ A Next.js application for the Technology's daily show with John Coogan and Jordi
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/tbpnOnTba.git
-cd tbpnOnTba
+git clone https://github.com/your-username/The RollupOnTba.git
+cd The RollupOnTba
 
 # Install dependencies
 npm install
