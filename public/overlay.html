@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rollup OBS Overlay</title>
+    <link rel="stylesheet" href="brand/rollup.css">
+    <link rel="stylesheet" href="overlay.css">
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <!-- Scale Container for OBS resolution scaling -->
+    <div id="scale-container">
+        <!-- Safe Zone Guides (edit mode only) -->
+        <div id="safe-zones" class="edit-only">
+            <div id="title-safe" class="safe-zone"></div>
+            <div id="action-safe" class="safe-zone"></div>
+        </div>
+        
+        <!-- Editor Toolbar (edit mode only) -->
+        <div id="editor-toolbar" class="edit-only">
+            <div class="toolbar-section">
+                <label>Presets:</label>
+                <select id="preset-select">
+                    <option value="x-safe">X Safe - Bottom Right Alert</option>
+                    <option value="top-right">X Safe - Top Right Leaderboard</option>
+                    <option value="compact">Compact</option>
+                    <option value="wide">Wide</option>
+                </select>
+            </div>
+            <div class="toolbar-section">
+                <button id="save-layout">Save</button>
+                <button id="reset-layout">Reset</button>
+                <button id="copy-url">Copy Overlay URL</button>
+            </div>
+            <div class="toolbar-section">
+                <label>
+                    <input type="checkbox" id="show-safe-margins"> Show Safe Margins
+                </label>
+            </div>
+            <div class="toolbar-section">
+                <button id="fire-preview-toast">Fire Preview Toast</button>
+            </div>
+            <div class="toolbar-section">
+                <label>
+                    <input type="checkbox" id="show-qr"> Show QR
+                </label>
+                <input type="file" id="qr-upload" accept=".png,.svg" style="display:none;">
+                <button id="upload-qr-btn">Upload QR</button>
+                <button id="reset-qr-btn">Reset QR</button>
+            </div>
+            <div class="toolbar-section">
+                <label>
+                    <input type="checkbox" id="mute-audio"> Mute
+                </label>
+                <label>
+                    Vol: <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.7">
+                </label>
+            </div>
+            <div id="position-readout" class="toolbar-section">
+                <span id="readout-text">Select a box to see position</span>
+            </div>
+        </div>
+
+        <!-- Overlay Container -->
+        <div id="overlay-container">
+            <!-- Leaderboard Box -->
+            <div id="leaderboardBox" class="draggable resizable card" data-component="leaderboard" style="position:absolute; left:1420px; top:80px; width:300px; height:400px;">
+                <div class="drag-handle">🏆 Top Tippers</div>
+                <div class="inner">
+                    <div id="leaderboard">
+                        <div id="leaderboard-list"></div>
+                    </div>
+                </div>
+                <div class="resize-handles edit-only">
+                    <div class="resize-handle nw" data-direction="nw"></div>
+                    <div class="resize-handle ne" data-direction="ne"></div>
+                    <div class="resize-handle sw" data-direction="sw"></div>
+                    <div class="resize-handle se" data-direction="se"></div>
+                </div>
+            </div>
+            
+            <!-- Tip Preview (edit mode only) -->
+            <div id="tipPreview" class="tip-pill preview edit-only" style="position:absolute; left:1340px; top:860px; width:400px; height:60px;">
+                <div class="row"><div class="name">🎉 bradley.base.eth</div><div class="amt">5 USDC</div></div>
+                <div class="resize-handles edit-only">
+                    <div class="resize-handle nw" data-direction="nw"></div>
+                    <div class="resize-handle ne" data-direction="ne"></div>
+                    <div class="resize-handle sw" data-direction="sw"></div>
+                    <div class="resize-handle se" data-direction="se"></div>
+                </div>
+            </div>
+            
+            <!-- QR Box -->
+            <div id="qrBox" class="draggable resizable card" data-component="qr" hidden>
+                <div class="drag-handle">📱 QR Code</div>
+                <div class="inner">
+                    <img id="qrImage" src="/assets/qr-placeholder.png" alt="QR" style="width:100%;height:100%;object-fit:contain;">
+                </div>
+                <div class="resize-handles edit-only">
+                    <div class="resize-handle nw" data-direction="nw"></div>
+                    <div class="resize-handle ne" data-direction="ne"></div>
+                    <div class="resize-handle sw" data-direction="sw"></div>
+                    <div class="resize-handle se" data-direction="se"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="overlay.js"></script>
+</body>
+</html>
