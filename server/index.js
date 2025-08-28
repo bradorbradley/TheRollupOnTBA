@@ -5,6 +5,7 @@ const path = require('path');
 const { setupSocketIO } = require('./realtime');
 const { nameResolver } = require('../plugins/base-overlay/server');
 const { initBullmeterNamespace } = require('./bullmeter/socket');
+const tokenRoutes = require('./tokenRoutes');
 
 const app = express();
 const server = http.createServer(app);
@@ -29,6 +30,9 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 // Serve all plugin assets
 app.use('/plugins', express.static(path.join(__dirname, '../plugins')));
+
+// Token management API routes
+app.use('/api', tokenRoutes);
 
 // Helper function to resolve name 
 async function resolveName(address) {

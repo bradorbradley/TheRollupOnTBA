@@ -27,6 +27,7 @@ plugins/
 ├── base-overlay/    # Core OBS overlay (tips, QR codes, notifications)
 ├── base-pay/       # Payment component (React)
 ├── bullmeter/      # Tekken-style voting overlay
+├── trading-tokens/ # Dynamic token trading system (host-managed)
 └── [future]/       # Additional plugins...
 ```
 
@@ -50,6 +51,17 @@ plugins/
 - Real-time voting system with anti-spoiler health bars
 - Host controls for fighter customization
 - **URL:** `http://localhost:3000/plugins/bullmeter/overlay.html?streamId=rollup`
+
+#### 🪙 Trading Tokens (`/plugins/trading-tokens/`)
+- Dynamic token trading system with host management
+- Multi-chain support (Base, Ethereum, Optimism, Polygon)
+- Automatic token metadata fetching from blockchain
+- Host editor for adding/removing tokens during streams
+- JSON-based atomic storage with per-stream configurations
+- **Editor URL:** `http://localhost:3000/plugins/trading-tokens/editor.html?streamId=rollup`
+- **Component:** Available as React component `DynamicTradingTokens`
+
+**Note:** The main app currently uses legacy hardcoded token trading in `/components/SponsorSection.tsx`. The dynamic system is available as a separate plugin for future integration.
 
 ### 🚀 Using Plugins
 Each plugin includes its own README with setup instructions. Plugins can be:
@@ -128,6 +140,33 @@ Returns top 10 tippers:
 ]
 ```
 
+### Trading Tokens API
+`GET /api/tokens?streamId=rollup`
+
+Returns enabled tokens for a stream:
+```json
+{
+  "success": true,
+  "tokens": [
+    {
+      "id": "noice",
+      "chainName": "base",
+      "address": "0x9cb41fd9dc6891bae8187029461bfaadf6cc0c69",
+      "name": "noice",
+      "symbol": "NOICE",
+      "decimals": 18,
+      "logoUrl": "https://...",
+      "enabled": true,
+      "sort": 1
+    }
+  ]
+}
+```
+
+`POST /api/tokens` - Add new token (requires x-admin-key header)
+`PUT /api/tokens/:id` - Update token (requires x-admin-key header)  
+`DELETE /api/tokens/:id` - Delete token (requires x-admin-key header)
+
 ### Test Endpoint
 `POST /api/admin/test-tip`
 
@@ -145,7 +184,21 @@ Simulates a tip for testing:
 ```
 ├── server/
 │   ├── index.js          # Main Express server
-│   └── realtime.js       # Socket.IO setup
+│   ├── realtime.js       # Socket.IO setup  
+│   ├── chains.js         # Blockchain network configurations
+│   ├── tokenMetadata.js  # Token metadata fetching with ethers.js
+│   ├── tokenStorage.js   # JSON-based atomic file storage
+│   └── tokenRoutes.js    # Token management CRUD API endpoints
+├── plugins/
+│   ├── base-overlay/     # Core OBS overlay system
+│   ├── base-pay/         # Payment component
+│   ├── bullmeter/        # Tekken-style voting overlay
+│   └── trading-tokens/   # Dynamic token trading system
+├── components/
+│   ├── SponsorSection.tsx # Legacy hardcoded token trading (active)
+│   └── [other components...]
+├── data/
+│   └── tokens.default.json # Seed data for new streams
 ├── public/
 │   ├── overlay.html      # Overlay page
 │   ├── overlay.js        # Overlay functionality

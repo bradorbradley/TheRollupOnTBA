@@ -1,0 +1,111 @@
+{
+  "streamId": "rollup",
+  "tokens": [
+    {
+      "id": "seed_noice",
+      "metadata": {
+        "address": "0x9CB41FD9dc6891bAE8187029461BfAAdf6CC0C69",
+        "chainId": 8453,
+        "name": "Noice",
+        "symbol": "NOICE",
+        "decimals": 18,
+        "logoUri": "/token logos/noice-button.png"
+      },
+      "enabled": true,
+      "sort": 0,
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "seed_bankroll",
+      "metadata": {
+        "address": "0x22af33fe49fd1fa80c7149773dde5890d3c76f3b",
+        "chainId": 8453,
+        "name": "Bankroll",
+        "symbol": "BANKR",
+        "decimals": 18,
+        "logoUri": "/token logos/bankr.gif"
+      },
+      "enabled": true,
+      "sort": 1,
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "seed_bracky",
+      "metadata": {
+        "address": "0x06f71fb90f84b35302d132322a3c90e4477333b0",
+        "chainId": 8453,
+        "name": "Bracky",
+        "symbol": "BRACKY",
+        "decimals": 18,
+        "logoUri": "/token logos/bracky.svg"
+      },
+      "enabled": true,
+      "sort": 2,
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "seed_harmonybot",
+      "metadata": {
+        "address": "0x26E0331355dF5Ef082F69dF161218093708a73ac",
+        "chainId": 8453,
+        "name": "HarmonyBot",
+        "symbol": "HARMONY",
+        "decimals": 18,
+        "logoUri": "/token logos/harmonybot.svg"
+      },
+      "enabled": true,
+      "sort": 3,
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "seed_degen",
+      "metadata": {
+        "address": "0x4ed4e862860bed51a9570b96d89af5e1b0efefed",
+        "chainId": 8453,
+        "name": "Degen",
+        "symbol": "DEGEN",
+        "decimals": 18,
+        "logoUri": "/token logos/degen.svg"
+      },
+      "enabled": true,
+      "sort": 4,
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "seed_indexy",
+      "metadata": {
+        "address": "0x1f015712aa2a48085ec93f87d643bb625b668b07",
+        "chainId": 8453,
+        "name": "Indexy",
+        "symbol": "INDEXY",
+        "decimals": 18,
+        "logoUri": "/token logos/indexy.svg"
+      },
+      "enabled": true,
+      "sort": 5,
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "seed_zora",
+      "metadata": {
+        "address": "0x1111111111166b7fe7bd91427724b487980afc69",
+        "chainId": 8453,
+        "name": "Zora",
+        "symbol": "ZORA",
+        "decimals": 18,
+        "logoUri": "/token logos/zora.svg"
+      },
+      "enabled": true,
+      "sort": 6,
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2024-01-01T00:00:00.000Z"
+    }
+  ],
+  "lastUpdated": "2025-08-28T15:43:22.061Z"
+}
