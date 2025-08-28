@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bull-Meter Fight Arena</title>
+    <link rel="stylesheet" href="brand/rollup.css">
+    <link rel="stylesheet" href="overlay.css">
+</head>
+<body>
+    <!-- Host Editor Panel (only visible in edit mode) -->
+    <div id="host-editor" class="edit-only">
+        <div class="editor-header">🥊 FIGHT EDITOR</div>
+        
+        <div class="editor-section">
+            <label>Prompt:</label>
+            <textarea id="prompt-input" placeholder="ETH will be the best performer in 12 months" maxlength="200" rows="3"></textarea>
+        </div>
+        
+        <div class="editor-section">
+            <label>Timer:</label>
+            <select id="timer-select">
+                <option value="1">1 min</option>
+                <option value="2">2 min</option>
+                <option value="3">3 min</option>
+                <option value="5" selected>5 min</option>
+                <option value="10">10 min</option>
+                <option value="15">15 min</option>
+            </select>
+        </div>
+        
+        <div class="fighters-config">
+            <div class="fighter-config left">
+                <h4>🐻 LEFT FIGHTER</h4>
+                <input type="text" id="left-name" placeholder="Bear" maxlength="20">
+                <input type="url" id="left-image" placeholder="Image URL or upload">
+                <input type="file" id="left-upload" accept="image/*" style="display: none;">
+                <button onclick="document.getElementById('left-upload').click()">Upload</button>
+                <input type="color" id="left-color" value="#FF5A5A">
+            </div>
+            
+            <div class="fighter-config right">
+                <h4>🐂 RIGHT FIGHTER</h4>
+                <input type="text" id="right-name" placeholder="Bull" maxlength="20">
+                <input type="url" id="right-image" placeholder="Image URL or upload">
+                <input type="file" id="right-upload" accept="image/*" style="display: none;">
+                <button onclick="document.getElementById('right-upload').click()">Upload</button>
+                <input type="color" id="right-color" value="#22C55E">
+            </div>
+        </div>
+        
+        <div class="editor-actions">
+            <button id="swap-fighters" class="secondary">🔄 Swap Sides</button>
+            <button id="start-fight" class="primary">🚀 Start Fight</button>
+            <button id="extend-timer" class="secondary" disabled>⏱️ +60s</button>
+            <button id="end-fight" class="danger" disabled>⏹️ End Early</button>
+            <button id="reveal-winner" class="success" disabled>👑 Reveal Winner</button>
+        </div>
+        
+        <div class="preview-section">
+            <button id="preview-left" class="preview-btn">👊 Preview Left Punch</button>
+            <button id="preview-right" class="preview-btn">👊 Preview Right Punch</button>
+        </div>
+        
+        <div class="layout-controls">
+            <button id="save-layout">💾 Save</button>
+            <button id="reset-layout">🔄 Reset</button>
+            <button id="copy-obs-url">📋 Copy OBS URL</button>
+        </div>
+        
+        <div class="fight-status">
+            <div id="status-text">No active fight</div>
+            <div id="timer-remaining"></div>
+        </div>
+    </div>
+
+    <!-- Safe Zone Guides -->
+    <div id="safe-zones" class="edit-only" style="display: none;">
+        <div id="title-safe" class="safe-zone"></div>
+        <div id="action-safe" class="safe-zone"></div>
+    </div>
+
+    <!-- Scale Container for 1920x1080 -->
+    <div id="scale-container">
+        <div id="fight-arena">
+            
+            <!-- Prompt Box (draggable in edit mode) -->
+            <div id="promptBox" class="draggable" style="position: absolute; left: 460px; top: 50px; width: 1000px; height: 100px;">
+                <div class="drag-handle edit-only">📝 PROMPT</div>
+                <div class="prompt-display">
+                    <div class="prompt-text">ETH will be the best performer in 12 months</div>
+                </div>
+                <div class="resize-handles edit-only">
+                    <div class="resize-handle nw"></div>
+                    <div class="resize-handle ne"></div>
+                    <div class="resize-handle sw"></div>
+                    <div class="resize-handle se"></div>
+                </div>
+            </div>
+
+            <!-- Fight Arena Box (draggable in edit mode) -->
+            <div id="arenaBox" class="draggable" style="position: absolute; left: 200px; top: 200px; width: 1520px; height: 600px;">
+                <div class="drag-handle edit-only">🥊 FIGHT ARENA</div>
+                <div class="arena-content">
+                    
+                    <!-- Health Bars -->
+                    <div class="health-bars">
+                        <div class="health-bar left">
+                            <div class="health-fill left-fill" id="left-health"></div>
+                            <div class="health-shimmer left-shimmer"></div>
+                        </div>
+                        <div class="fight-timer" id="main-timer">5:00</div>
+                        <div class="health-bar right">
+                            <div class="health-fill right-fill" id="right-health"></div>
+                            <div class="health-shimmer right-shimmer"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Fighter Cards -->
+                    <div class="fighter-cards">
+                        <div class="fighter-card left" id="left-fighter">
+                            <div class="fighter-portrait" id="left-portrait">🐻</div>
+                            <div class="fighter-name" id="left-name-display">BEAR</div>
+                        </div>
+                        
+                        <div class="vs-display">VS</div>
+                        
+                        <div class="fighter-card right" id="right-fighter">
+                            <div class="fighter-portrait" id="right-portrait">🐂</div>
+                            <div class="fighter-name" id="right-name-display">BULL</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Fight Stage -->
+                    <div class="fight-stage">
+                        <div class="stage-background"></div>
+                        <div class="fight-line"></div>
+                        
+                        <!-- PFP Fighters spawn here -->
+                        <div id="fighters-container"></div>
+                        
+                        <!-- Impact Effects -->
+                        <div id="impact-effects"></div>
+                        
+                        <!-- Screen Shake Container -->
+                        <div id="screen-shake"></div>
+                    </div>
+                    
+                    <!-- Percentage Display (only shown during reveal) -->
+                    <div class="percentage-display" id="percentages" style="display: none;">
+                        <div class="pct-left" id="left-percentage">50%</div>
+                        <div class="pct-right" id="right-percentage">50%</div>
+                    </div>
+                    
+                </div>
+                <div class="resize-handles edit-only">
+                    <div class="resize-handle nw"></div>
+                    <div class="resize-handle ne"></div>
+                    <div class="resize-handle sw"></div>
+                    <div class="resize-handle se"></div>
+                </div>
+            </div>
+
+            <!-- KO Overlay (hidden until reveal) -->
+            <div id="ko-overlay" class="ko-hidden">
+                <div class="ko-flash"></div>
+                <div class="ko-content">
+                    <div class="ko-text" id="ko-winner">BULL WINS!</div>
+                    <div class="ko-subtitle">PERFECT!</div>
+                    <div class="final-stats" id="final-stats">
+                        <div class="stat-bull">BULL: <span id="final-bull-pct">65%</span></div>
+                        <div class="stat-bear">BEAR: <span id="final-bear-pct">35%</span></div>
+                    </div>
+                </div>
+                <div class="confetti-burst" id="confetti-container"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Load Socket.IO from existing server -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="overlay.js"></script>
+</body>
+</html>

@@ -3,11 +3,16 @@ const http = require('http');
 const cors = require('cors');
 const path = require('path');
 const { setupSocketIO } = require('./realtime');
-const { nameResolver } = require('./tips');
+const { nameResolver } = require('../plugins/base-overlay/server');
+const { initBullmeterNamespace } = require('./bullmeter/socket');
 
 const app = express();
 const server = http.createServer(app);
 const io = setupSocketIO(server);
+
+// Initialize Bull-Meter namespace
+const bullmeterNamespace = initBullmeterNamespace(io);
+global.bullmeterIO = io; // Make available to API routes
 
 const PORT = process.env.PORT || 3000;
 
@@ -21,6 +26,9 @@ let lastAlertTime = 0;
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../public')));
+
+// Serve all plugin assets
+app.use('/plugins', express.static(path.join(__dirname, '../plugins')));
 
 // Helper function to resolve name 
 async function resolveName(address) {
@@ -181,5 +189,9 @@ app.get('/api/resolve', async (req, res) => {
 
 server.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
-  console.log(`Overlay available at: http://localhost:${PORT}/overlay.html?streamId=rollup`);
+  console.log(`\n🔌 AVAILABLE PLUGINS:`);
+  console.log(`Base Overlay: http://localhost:${PORT}/plugins/base-overlay/overlay.html?streamId=rollup`);
+  console.log(`Base Editor:  http://localhost:${PORT}/plugins/base-overlay/overlay.html?streamId=rollup&edit=1`);
+  console.log(`Bull-Meter:   http://localhost:${PORT}/plugins/bullmeter/overlay.html?streamId=rollup`);
+  console.log(`Fight Editor: http://localhost:${PORT}/plugins/bullmeter/overlay.html?streamId=rollup&edit=1`);
 });

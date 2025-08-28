@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bull-Meter Mini App - Testing</title>
+    <link rel="stylesheet" href="brand/rollup.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--rollup-font);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .mini-app {
+            background: white;
+            border-radius: 24px;
+            padding: 24px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .app-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        
+        .app-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--rollup-blue);
+            margin-bottom: 8px;
+        }
+        
+        .app-subtitle {
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .credits-display {
+            background: var(--rollup-blue);
+            border-radius: 16px;
+            padding: 16px;
+            text-align: center;
+            margin-bottom: 24px;
+            color: white;
+        }
+        
+        .credits-amount {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+        
+        .credits-label {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        .buy-credits {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+        
+        .buy-btn {
+            padding: 8px 12px;
+            border: 2px solid var(--rollup-blue);
+            border-radius: 12px;
+            background: white;
+            color: var(--rollup-blue);
+            font-weight: 700;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .buy-btn:hover {
+            background: var(--rollup-blue);
+            color: white;
+            transform: translateY(-1px);
+        }
+        
+        .current-prompt {
+            background: #f8f9fa;
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+        
+        .prompt-status {
+            font-size: 12px;
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .prompt-text {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+        
+        .prompt-timer {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--rollup-blue);
+        }
+        
+        .voting-section {
+            margin-bottom: 24px;
+        }
+        
+        .vote-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        
+        .vote-btn {
+            padding: 20px;
+            border-radius: 20px;
+            border: 3px solid;
+            background: white;
+            font-size: 18px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .vote-btn.bull {
+            border-color: var(--bull-color);
+            color: var(--bull-color);
+        }
+        
+        .vote-btn.bear {
+            border-color: var(--bear-color);
+            color: var(--bear-color);
+        }
+        
+        .vote-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+        
+        .vote-btn.bull:hover:not(:disabled) {
+            background: var(--bull-color);
+            color: white;
+        }
+        
+        .vote-btn.bear:hover:not(:disabled) {
+            background: var(--bear-color);
+            color: white;
+        }
+        
+        .vote-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .vote-emoji {
+            font-size: 32px;
+        }
+        
+        .vote-label {
+            font-size: 16px;
+        }
+        
+        .credit-selector {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        
+        .credit-selector label {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .credit-input {
+            padding: 8px 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            width: 80px;
+            text-align: center;
+        }
+        
+        .spam-section {
+            border-top: 2px solid #eee;
+            padding-top: 20px;
+        }
+        
+        .spam-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+        
+        .spam-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        
+        .spam-btn {
+            padding: 16px;
+            border: 2px solid;
+            border-radius: 16px;
+            background: white;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .spam-btn.tier1 {
+            border-color: #FFD700;
+            color: #FFD700;
+        }
+        
+        .spam-btn.tier2 {
+            border-color: #FF6B35;
+            color: #FF6B35;
+        }
+        
+        .spam-btn.tier3 {
+            border-color: #FF1744;
+            color: #FF1744;
+        }
+        
+        .spam-btn:hover:not(:disabled) {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .spam-btn.tier1:hover:not(:disabled) {
+            background: #FFD700;
+            color: white;
+        }
+        
+        .spam-btn.tier2:hover:not(:disabled) {
+            background: #FF6B35;
+            color: white;
+        }
+        
+        .spam-btn.tier3:hover:not(:disabled) {
+            background: #FF1744;
+            color: white;
+        }
+        
+        .spam-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .spam-emoji {
+            font-size: 24px;
+        }
+        
+        .spam-cost {
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .no-prompt {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        .status-bar {
+            background: var(--rollup-blue);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            text-align: center;
+            margin-top: 16px;
+        }
+        
+        .selected-side {
+            background: rgba(47, 91, 255, 0.1);
+            border-radius: 8px;
+            padding: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="mini-app">
+        <div class="app-header">
+            <div class="app-title">🎯 Bull-Meter</div>
+            <div class="app-subtitle">Test your prediction skills</div>
+        </div>
+        
+        <div class="credits-display">
+            <div class="credits-amount" id="credits-amount">1000</div>
+            <div class="credits-label">Credits Available</div>
+        </div>
+        
+        <div class="buy-credits">
+            <button class="buy-btn" onclick="buyCredits(500)">+500<br>$5.00</button>
+            <button class="buy-btn" onclick="buyCredits(1000)">+1000<br>$10.00</button>
+            <button class="buy-btn" onclick="buyCredits(2000)">+2000<br>$20.00</button>
+        </div>
+        
+        <div id="prompt-container">
+            <div class="no-prompt">
+                No active prompt.<br>
+                <small>Host needs to start a prediction round.</small>
+            </div>
+        </div>
+        
+        <div id="voting-interface" style="display: none;">
+            <div class="current-prompt">
+                <div class="prompt-status" id="prompt-status">🟢 Live Voting</div>
+                <div class="prompt-text" id="mini-prompt-text"></div>
+                <div class="prompt-timer" id="mini-timer">5:00</div>
+            </div>
+            
+            <div class="voting-section">
+                <div class="credit-selector">
+                    <label>Bet:</label>
+                    <input type="number" class="credit-input" id="vote-credits" value="2" min="1" max="1000">
+                    <span>credits</span>
+                </div>
+                
+                <div id="selected-side-display" class="selected-side" style="display: none;">
+                    Selected: <span id="selected-side-text"></span>
+                </div>
+                
+                <div class="vote-buttons">
+                    <button class="vote-btn bull" id="bull-btn" onclick="selectSide('bull')">
+                        <div class="vote-emoji">🐂</div>
+                        <div class="vote-label">BULL</div>
+                    </button>
+                    <button class="vote-btn bear" id="bear-btn" onclick="selectSide('bear')">
+                        <div class="vote-emoji">🐻</div>
+                        <div class="vote-label">BEAR</div>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="spam-section">
+                <div class="spam-title">💥 Spam Reactions</div>
+                <div class="spam-buttons">
+                    <button class="spam-btn tier1" onclick="sendSpam(1)">
+                        <div class="spam-emoji">✨</div>
+                        <div class="spam-cost">1 credit</div>
+                    </button>
+                    <button class="spam-btn tier2" onclick="sendSpam(2)">
+                        <div class="spam-emoji">💥</div>
+                        <div class="spam-cost">5 credits</div>
+                    </button>
+                    <button class="spam-btn tier3" onclick="sendSpam(3)">
+                        <div class="spam-emoji">🚀</div>
+                        <div class="spam-cost">10 credits</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="status-bar" id="status-bar">
+            Ready to vote • Stream: rollup
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        // Mini-app state
+        let credits = 1000;
+        let selectedSide = null;
+        let socket = null;
+        let streamId = 'rollup';
+        let currentPrompt = null;
+        let timerInterval = null;
+        
+        // User profile (fake data for testing)
+        const userProfile = {
+            name: 'testuser.base.eth',
+            pfpUrl: 'https://i.pravatar.cc/64?u=testuser'
+        };
+        
+        // Initialize mini-app
+        document.addEventListener('DOMContentLoaded', function() {
+            setupSocket();
+            updateCreditsDisplay();
+            updateStatus('Connecting...');
+        });
+        
+        // Socket.IO setup
+        function setupSocket() {
+            socket = io('/bullmeter');
+            
+            socket.emit('join-room', streamId);
+            
+            socket.on('prompt:start', handlePromptStart);
+            socket.on('prompt:update', handlePromptUpdate);
+            socket.on('vote:new', handleVoteConfirm);
+            socket.on('spam:new', handleSpamConfirm);
+            socket.on('prompt:reveal', handleReveal);
+            
+            socket.on('connect', () => {
+                console.log('Connected to Bull-Meter');
+                updateStatus('Connected • Ready to vote');
+            });
+            
+            socket.on('disconnect', () => {
+                console.log('Disconnected from Bull-Meter');
+                updateStatus('Disconnected • Reconnecting...');
+            });
+        }
+        
+        // Socket event handlers
+        function handlePromptStart(data) {
+            console.log('Prompt started:', data);
+            currentPrompt = { ...data, status: 'live' };
+            
+            document.getElementById('mini-prompt-text').textContent = data.text;
+            startTimer(data.endsAt);
+            
+            document.getElementById('prompt-container').style.display = 'none';
+            document.getElementById('voting-interface').style.display = 'block';
+            
+            updateStatus('🟢 Live voting • Place your bets!');
+        }
+        
+        function handlePromptUpdate(data) {
+            if (data.text && currentPrompt) {
+                currentPrompt.text = data.text;
+                document.getElementById('mini-prompt-text').textContent = data.text;
+            }
+            
+            if (data.endsAt && currentPrompt) {
+                currentPrompt.endsAt = data.endsAt;
+                startTimer(data.endsAt);
+            }
+        }
+        
+        function handleVoteConfirm(data) {
+            // Visual feedback for own votes
+            console.log('Vote confirmed:', data);
+        }
+        
+        function handleSpamConfirm(data) {
+            // Visual feedback for spam
+            console.log('Spam confirmed:', data);
+        }
+        
+        function handleReveal(data) {
+            console.log('Results revealed:', data);
+            
+            if (timerInterval) {
+                clearInterval(timerInterval);
+            }
+            
+            document.getElementById('mini-timer').textContent = 'ENDED';
+            document.getElementById('prompt-status').textContent = '🏆 Results Revealed';
+            
+            // Disable voting buttons
+            document.getElementById('bull-btn').disabled = true;
+            document.getElementById('bear-btn').disabled = true;
+            
+            const winner = data.winnerSide.toUpperCase();
+            updateStatus(`🏆 ${winner} WINS! ${data.bullPct}% Bull • ${data.bearPct}% Bear`);
+            
+            // Reset after 10 seconds
+            setTimeout(resetPrompt, 10000);
+        }
+        
+        // Timer functionality
+        function startTimer(endsAt) {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+            }
+            
+            const endTime = new Date(endsAt).getTime();
+            const display = document.getElementById('mini-timer');
+            
+            timerInterval = setInterval(() => {
+                const now = new Date().getTime();
+                const timeLeft = endTime - now;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    display.textContent = '0:00';
+                    return;
+                }
+                
+                const minutes = Math.floor(timeLeft / 60000);
+                const seconds = Math.floor((timeLeft % 60000) / 1000);
+                display.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            }, 1000);
+        }
+        
+        // Credit management
+        function buyCredits(amount) {
+            credits += amount;
+            updateCreditsDisplay();
+            updateStatus(`💳 Bought ${amount} credits (+$${(amount/100).toFixed(2)})`);
+            
+            setTimeout(() => {
+                updateStatus('Connected • Ready to vote');
+            }, 2000);
+        }
+        
+        function updateCreditsDisplay() {
+            document.getElementById('credits-amount').textContent = credits.toLocaleString();
+        }
+        
+        // Voting functionality
+        function selectSide(side) {
+            if (!currentPrompt || currentPrompt.status !== 'live') {
+                updateStatus('❌ No active voting round');
+                return;
+            }
+            
+            const voteCredits = parseInt(document.getElementById('vote-credits').value) || 2;
+            
+            if (voteCredits > credits) {
+                updateStatus('❌ Not enough credits');
+                return;
+            }
+            
+            if (voteCredits < 1) {
+                updateStatus('❌ Minimum bet is 1 credit');
+                return;
+            }
+            
+            // Deduct credits
+            credits -= voteCredits;
+            updateCreditsDisplay();
+            
+            // Send vote
+            const voteData = {
+                streamId,
+                side,
+                credits: voteCredits,
+                user: userProfile
+            };
+            
+            fetch('/api/bullmeter/vote', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(voteData)
+            }).then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    selectedSide = side;
+                    updateSelectedSideDisplay();
+                    updateStatus(`🎯 Voted ${side.toUpperCase()} with ${voteCredits} credits`);
+                } else {
+                    // Refund on error
+                    credits += voteCredits;
+                    updateCreditsDisplay();
+                    updateStatus('❌ Vote failed: ' + (result.error || 'Unknown error'));
+                }
+            }).catch(error => {
+                // Refund on error
+                credits += voteCredits;
+                updateCreditsDisplay();
+                updateStatus('❌ Vote failed: ' + error.message);
+            });
+        }
+        
+        function updateSelectedSideDisplay() {
+            if (selectedSide) {
+                const display = document.getElementById('selected-side-display');
+                const text = document.getElementById('selected-side-text');
+                text.textContent = selectedSide.toUpperCase();
+                display.style.display = 'block';
+            }
+        }
+        
+        // Spam functionality
+        function sendSpam(tier) {
+            if (!currentPrompt || currentPrompt.status !== 'live') {
+                updateStatus('❌ No active voting round');
+                return;
+            }
+            
+            if (!selectedSide) {
+                updateStatus('❌ Select Bull or Bear first');
+                return;
+            }
+            
+            const costs = { 1: 1, 2: 5, 3: 10 };
+            const cost = costs[tier];
+            
+            if (cost > credits) {
+                updateStatus('❌ Not enough credits for spam');
+                return;
+            }
+            
+            // Deduct credits
+            credits -= cost;
+            updateCreditsDisplay();
+            
+            // Send spam
+            const spamData = {
+                streamId,
+                side: selectedSide,
+                tier,
+                user: userProfile
+            };
+            
+            fetch('/api/bullmeter/spam', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(spamData)
+            }).then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    updateStatus(`💥 Sent tier ${tier} spam (${cost} credits)`);
+                } else {
+                    // Refund on error
+                    credits += cost;
+                    updateCreditsDisplay();
+                    updateStatus('❌ Spam failed: ' + (result.error || 'Unknown error'));
+                }
+            }).catch(error => {
+                // Refund on error
+                credits += cost;
+                updateCreditsDisplay();
+                updateStatus('❌ Spam failed: ' + error.message);
+            });
+        }
+        
+        // UI helpers
+        function updateStatus(message) {
+            document.getElementById('status-bar').textContent = message;
+        }
+        
+        function resetPrompt() {
+            currentPrompt = null;
+            selectedSide = null;
+            
+            document.getElementById('voting-interface').style.display = 'none';
+            document.getElementById('prompt-container').style.display = 'block';
+            document.getElementById('selected-side-display').style.display = 'none';
+            
+            // Re-enable buttons
+            document.getElementById('bull-btn').disabled = false;
+            document.getElementById('bear-btn').disabled = false;
+            
+            updateStatus('Connected • Waiting for next round');
+        }
+    </script>
+</body>
+</html>

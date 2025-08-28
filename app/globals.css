@@ -1,0 +1,204 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* Custom font face for Record Laser */
+@font-face {
+  font-family: Record Laser;
+  src: url("https://cdn.prod.website-files.com/67c21d2a7633aaaad4da9a36/67c4e4be0d51e5ec840384ca_BlackTrial.otf") format("opentype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* The Rollup Design System CSS Variables */
+:root {
+  /* Brand */
+  --brand-blue: #3264FF;
+  --brand-orange: #F59E0B;
+  --brand-red: #EF4444;
+  
+  /* The Rollup Tan-White Theme (Default) */
+  --bg: #F4F3EF;          /* Tan-white background like therollup.co */
+  --bg-elev: #FFFFFF;     /* Pure white elevated surfaces */
+  --ink: #1A1A1A;         /* Dark text */
+  --ink-muted: #6B7280;   /* Muted text */
+  --line: #E5E7EB;        /* Light borders */
+  --chip-stroke: #D1D5DB; /* Chip borders */
+  --input-bg: #FFFFFF;    /* Input backgrounds */
+  --input-stroke: #D1D5DB; /* Input borders */
+  --cta-text: #FFFFFF;    /* Button text */
+  --button-shadow: #000000; /* 3D button shadow */
+}
+
+/* Base styles */
+body {
+  -webkit-font-smoothing: antialiased;
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji';
+  background-color: var(--bg);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0;
+  font-weight: 400;
+  min-height: 100vh;
+}
+
+/* Animations */
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-content {
+  animation: marquee-scroll 30s linear infinite;
+}
+
+/* 3D Button Styles */
+.btn-3d {
+  position: relative;
+  transform: translateY(0);
+  transition: all 120ms ease-out;
+  box-shadow: 0 4px 0 var(--button-shadow);
+}
+
+.btn-3d:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 0 var(--button-shadow);
+}
+
+.btn-3d:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 var(--button-shadow);
+}
+
+/* Video container styles */
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Loading state - currently unused but kept for future use */
+.loading {
+  display: none;
+}
+
+/* TAPWATER token link styling */
+.disclaimer .token-link {
+  color: #2154F7 !important;
+  text-decoration: underline !important;
+  font-weight: bold !important;
+}
+
+.disclaimer .token-link:hover,
+.disclaimer .token-link:visited,
+.disclaimer .token-link:active {
+  color: #2154F7 !important;
+  text-decoration: underline !important;
+  font-weight: bold !important;
+}
+
+/* The Rollup Typography */
+h1 {
+  font-size: 2.25rem; /* 36px */
+  line-height: 2.75rem; /* 44px */
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin: 0;
+}
+
+h2 {
+  font-size: 1.75rem; /* 28px */
+  line-height: 2.25rem; /* 36px */
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin: 0;
+}
+
+h3 {
+  font-size: 1.25rem; /* 20px */
+  line-height: 1.75rem; /* 28px */
+  font-weight: 700;
+  margin: 0;
+}
+
+p {
+  font-size: 1rem; /* 16px */
+  line-height: 1.5rem; /* 24px */
+  font-weight: 400;
+  margin: 0;
+}
+
+.meta {
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.25rem; /* 20px */
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* Utility classes */
+.text-link-disclaimer {
+  font-family: 'Geist Mono', monospace;
+  font-weight: 600;
+  text-decoration: none;
+  color: inherit;
+  text-align: left;
+}
+
+/* Component specific styles that need to remain */
+.dot {
+  background-color: var(--brand-red);
+  filter: drop-shadow(0 0 9px #ff0000b3);
+  border-radius: 100px;
+  width: 12px;
+  height: 12px;
+  box-shadow: inset 0 0 5px #ffffff52;
+}
+
+.dot.grey {
+  filter: none;
+  background-color: #a1a1a1;
+}
+
+.shine {
+  z-index: 2;
+  opacity: 1;
+  filter: blur(50px);
+  background-color: #0000007a;
+  border-radius: 0%;
+  width: 80%;
+  height: 120%;
+  margin-left: auto;
+  margin-right: auto;
+  position: absolute;
+  left: auto;
+  right: auto;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 479px) {
+  h2 {
+    font-size: 2em;
+    line-height: 90%;
+  }
+  
+  .shine {
+    display: none;
+  }
+}

@@ -1,0 +1,45 @@
+/* Rollup Brand Variables */
+:root {
+  /* Unified Brand Colors */
+  --rollup-blue: #2F5BFF;
+  --rollup-text: #ffffff;
+  --rollup-font: 'Inter', system-ui, -apple-system, sans-serif;
+  --rollup-shadow: #000;
+  
+  /* Legacy compatibility */
+  --brand-blue: #2F5BFF;
+  --brand-surface: #223043;
+  --brand-shadow: #000;
+  --text: #ffffff;
+  --brand-bg: #0f0f23;
+  --brand-text: #ffffff;
+  --brand-accent: #2F5BFF;
+  --brand-accent-2: #2F5BFF;
+  
+  /* Layout */
+  --radius: 24px;
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.4);
+  
+  /* Typography */
+  --font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  
+  /* Editor specific */
+  --editor-primary: #3b82f6;
+  --editor-secondary: #64748b;
+  --editor-success: #10b981;
+  --editor-warning: #f59e0b;
+  --editor-danger: #ef4444;
+  
+  /* Safe zones */
+  --safe-title: rgba(59, 130, 246, 0.3);
+  --safe-action: rgba(139, 92, 246, 0.2);
+  
+  /* Grid */
+  --grid-size: 8px;
+  
+  /* Animation */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+}

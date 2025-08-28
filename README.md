@@ -1,6 +1,6 @@
-# Rollup OBS Overlay System
+# Rollup Mini-App Platform
 
-An OBS overlay system for Base Pay USDC tips with real-time alerts and leaderboard functionality.
+A modular mini-app platform with plugin architecture for streamers and content creators. Built for easy customization and productization.
 
 ## Features
 
@@ -16,6 +16,47 @@ An OBS overlay system for Base Pay USDC tips with real-time alerts and leaderboa
 - 💾 **Layout Persistence** - Save and share custom layouts via URL
 - ⌨️ **Keyboard Controls** - Arrow keys for precise positioning
 - 🎊 **Confetti Effects** - Celebratory animations on tips
+
+## 🔧 Plugin Architecture
+
+This platform uses a modular plugin system for easy customization and productization:
+
+### 📁 Plugin Structure
+```
+plugins/
+├── base-overlay/    # Core OBS overlay (tips, QR codes, notifications)
+├── base-pay/       # Payment component (React)
+├── bullmeter/      # Tekken-style voting overlay
+└── [future]/       # Additional plugins...
+```
+
+### Available Plugins
+
+#### 🎯 Base Overlay (`/plugins/base-overlay/`)
+- Core OBS overlay system
+- Tip notifications and sound effects
+- QR code display and customization
+- Drag & drop editor for positioning
+- **URL:** `http://localhost:3000/plugins/base-overlay/overlay.html?streamId=rollup`
+
+#### 💳 Base Pay (`/plugins/base-pay/`)
+- React payment component
+- Base blockchain integration
+- Wallet connection handling
+
+#### 🥊 BullMeter (`/plugins/bullmeter/`)
+- Tekken-style fight arena for predictions
+- PFP fighter animations with combat moves
+- Real-time voting system with anti-spoiler health bars
+- Host controls for fighter customization
+- **URL:** `http://localhost:3000/plugins/bullmeter/overlay.html?streamId=rollup`
+
+### 🚀 Using Plugins
+Each plugin includes its own README with setup instructions. Plugins can be:
+- Mixed and matched for different use cases
+- Easily removed or disabled
+- Extended with custom functionality
+- Used independently or combined
 
 ## Quick Start
 
@@ -37,7 +78,7 @@ The server will start at `http://localhost:3000`
 
 1. Open OBS Studio
 2. Add a new **Browser Source**
-3. Set the URL to: `http://localhost:3000/overlay.html?streamId=rollup`
+3. Set the URL to: `http://localhost:3000/plugins/base-overlay/overlay.html?streamId=rollup`
 4. Set Width: `1920`, Height: `1080`
 5. **Important**: In the Audio Mixer, make sure the Browser Source audio channel is **enabled/unmuted**
 
@@ -120,7 +161,7 @@ Simulates a tip for testing:
 
 ### Stream ID
 Change the stream ID in the overlay URL:
-`http://localhost:3000/overlay.html?streamId=your-stream-id`
+`http://localhost:3000/plugins/base-overlay/overlay.html?streamId=your-stream-id`
 
 ### Audio
 1. Add your `tip.mp3` file to `public/assets/`
@@ -176,7 +217,7 @@ Replace the test endpoint with real Base Pay webhook integration when ready for 
 
 Access the visual editor to customize your overlay layout:
 
-1. **Open Editor**: Visit `http://localhost:3000/overlay.html?streamId=rollup&edit=1`
+1. **Open Editor**: Visit `http://localhost:3000/plugins/base-overlay/overlay.html?streamId=rollup&edit=1`
 2. **Move Components**: Click and drag the header bars of Alert or Leaderboard boxes
 3. **Resize Components**: Drag the corner handles when a box is selected
 4. **Keyboard Controls**: 
@@ -202,7 +243,7 @@ Access the visual editor to customize your overlay layout:
 **Local Storage**: Changes are automatically saved in edit mode
 **Shareable URLs**: Click "Copy Overlay URL" to generate a URL like:
 ```
-http://localhost:3000/overlay.html?streamId=rollup&layout=eyJ...
+http://localhost:3000/plugins/base-overlay/overlay.html?streamId=rollup&layout=eyJ...
 ```
 
 **For OBS**: Use the copied URL (without `&edit=1`) in your Browser Source
